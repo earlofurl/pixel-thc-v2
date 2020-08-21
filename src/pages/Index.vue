@@ -4,8 +4,7 @@
       <amplify-authenticator>
         <amplify-sign-in
           slot="sign-in"
-          header-text="Hello World"
-          hide-sign-up="true"
+          header-text="Hello World Test Test Test"
         ></amplify-sign-in>
       </amplify-authenticator>
     </div>
