@@ -1,0 +1,20 @@
+{
+    "dev": {
+        "awscloudformation": {
+            "AuthRoleName": "amplify-pixelthc-dev-123601-authRole",
+            "UnauthRoleArn": "arn:aws:iam::212465152534:role/amplify-pixelthc-dev-123601-unauthRole",
+            "AuthRoleArn": "arn:aws:iam::212465152534:role/amplify-pixelthc-dev-123601-authRole",
+            "Region": "us-west-2",
+            "DeploymentBucketName": "amplify-pixelthc-dev-123601-deployment",
+            "UnauthRoleName": "amplify-pixelthc-dev-123601-unauthRole",
+            "StackName": "amplify-pixelthc-dev-123601",
+            "StackId": "arn:aws:cloudformation:us-west-2:212465152534:stack/amplify-pixelthc-dev-123601/8c86c580-e3e5-11ea-ba1b-02b86ece0ef3",
+            "AmplifyAppId": "d1b2fm1pef4v3l"
+        },
+        "categories": {
+            "auth": {
+                "pixelthc786ec2f2": {}
+            }
+        }
+    }
+}
