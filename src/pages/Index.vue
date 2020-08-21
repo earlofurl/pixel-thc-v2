@@ -1,14 +1,19 @@
 <template>
   <q-page class="flex flex-center">
-    <img
-      alt="Quasar logo"
-      src="~assets/quasar-logo-full.svg"
-    >
+    <div>
+      <amplify-authenticator>
+        <amplify-sign-in
+          slot="sign-in"
+          header-text="Hello World"
+          hide-sign-up="true"
+        ></amplify-sign-in>
+      </amplify-authenticator>
+    </div>
   </q-page>
 </template>
 
 <script>
 export default {
-  name: 'PageIndex'
-}
+  name: "PageIndex"
+};
 </script>
