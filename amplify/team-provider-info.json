@@ -12,9 +12,6 @@
             "AmplifyAppId": "d1b2fm1pef4v3l"
         },
         "categories": {
-            "auth": {
-                "pixelthc786ec2f2": {}
-            },
             "hosting": {
                 "amplifyhosting": {
                     "appId": "d1b2fm1pef4v3l",
