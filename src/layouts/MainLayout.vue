@@ -15,7 +15,7 @@
           Pixel THC
         </q-toolbar-title>
 
-        <div>Quasar v{{ $q.version }}</div>
+        <div>PixelTHC v0.8.22</div>
       </q-toolbar>
     </q-header>
 
