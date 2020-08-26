@@ -4,6 +4,9 @@
       <div class="col">
       <CustomerCard />
       </div>
+      <div class="col">
+        <FacilityDetailCard />
+      </div>
     </div>
         <q-card>
         <h4>Add Facility</h4>
@@ -102,11 +105,12 @@
 
 <script>
 import CustomerCard from "../components/CustomerCard";
+import FacilityDetailCard from "components/FacilityDetailCard";
 import store from "../store";
 
 export default {
   name: "CustomerView",
-  components: { CustomerCard },
+  components: {FacilityDetailCard, CustomerCard },
   data() {
     return {
       facility: this.createFreshFacilityObject()
