@@ -33,6 +33,12 @@ export default {
   getCustomer(id) {
     return apiClient.get(`/customers/${id}`);
   },
+  getFacilities() {
+    return apiClient.get("/customers/facilities");
+  },
+  getFacility(id) {
+    return apiClient.get(`/customers/facilities/${id}`);
+  },
   getLineItems(ids) {
     return apiClient.get(`/lineitems?${ids}`);
   },
@@ -43,6 +49,9 @@ export default {
     console.log("postCustomer is being called within apiService");
     console.log(customer);
     return apiClient.post("/customers", customer);
+  },
+  postFacility(facility) {
+    return apiClient.post("/customers/facilities", facility);
   },
   getStockById(id) {
     return apiClient.get(`/stock/${id}`);

@@ -44,3 +44,26 @@ export function fetchCustomer({ commit, getters, state }, id) {
     });
   }
 }
+
+export function fetchFacilities({ commit, dispatch, state }) {
+  return apiService
+    .getFacilities()
+    .then(response => {
+      commit("SET_FACILITIES", response.data);
+    })
+    .catch(error => {
+      throw new Error("Could not fetch facilities");
+    });
+}
+
+export function createFacility({ commit, dispatch }, facility) {
+  return apiService
+    .postFacility(facility)
+    .then(response => {
+      console.log(response);
+      commit("ADD_FACILITY", facility);
+    })
+    .catch(error => {
+      throw new Error("Could not create facility");
+    });
+}
