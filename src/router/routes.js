@@ -17,6 +17,39 @@ const routes = [
       }
     ]
   },
+  {
+    path: "/lab",
+    component: () => import("layouts/MainLayout.vue"),
+    children: [
+      {
+        path: "",
+        component: () => import("pages/Lab.vue"),
+        meta: {
+          requiresAuth: true
+        }
+      }
+    ]
+  },
+  {
+    path: "/customers",
+    component: () => import("layouts/MainLayout.vue"),
+    children: [
+      {
+        path: "",
+        component: () => import("pages/Customers.vue"),
+        meta: {
+          requiresAuth: true
+        }
+      },
+      {
+        path: "create",
+        component: () => import("pages/CustomerCreate.vue"),
+        meta: {
+          requiresAuth: true
+        }
+      }
+    ]
+  },
 
   // Always leave this as last one,
   // but you can also remove it

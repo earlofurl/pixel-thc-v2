@@ -42,8 +42,11 @@
         </div> -->
         <router-link to="/">Home</router-link>
         <router-link v-if="$auth.isAuthenticated" to="/profile"
-          >Profile</router-link
-        >
+          >Profile</router-link>
+        <router-link v-if="$auth.isAuthenticated" to="/lab"
+        >Lab</router-link>
+        <router-link v-if="$auth.isAuthenticated" to="/customers"
+        >Customers</router-link>
       </q-list>
     </q-drawer>
 
