@@ -1,12 +1,15 @@
 <template>
   <div class="q-pa-sm">
     <div class="row">
-      <div class="col-3">
+      <div class="col">
       <CustomerCard />
       </div>
-      <div class="col-7">
+    </div>
+        <q-card>
         <h4>Add Facility</h4>
-        <q-form class="q-gutter-md" @submit="createFacility">
+        <q-form class="q-col-gutter-md" @submit="createFacility">
+          <div class="row">
+            <div class="col">
           <q-list>
             <q-item>
               <q-item-section>
@@ -39,6 +42,10 @@
                 <q-input dense outlined v-model="facility.email" label="Email" />
               </q-item-section>
             </q-item>
+          </q-list>
+            </div>
+            <div class="col">
+              <q-list>
             <q-item>
               <q-item-section>
                 <q-item-label class="q-pb-xs">Address Line 1</q-item-label>
@@ -81,11 +88,15 @@
                 <q-input autogrow outlined v-model="facility.notes" label="Notes" type="textarea" />
               </q-item-section>
             </q-item>
+
           </q-list>
+            </div>
+          </div>
+          <q-card-section>
           <q-btn color="primary" type="submit" class="q-mr-xs" label="Submit" />
+          </q-card-section>
         </q-form>
-      </div>
-    </div>
+        </q-card>
   </div>
 </template>
 
