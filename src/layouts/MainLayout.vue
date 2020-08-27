@@ -47,6 +47,10 @@
         >Lab</router-link>
         <router-link v-if="$auth.isAuthenticated" to="/customers"
         >Customers</router-link>
+        <router-link v-if="$auth.isAuthenticated" to="/stock"
+        >Stock</router-link>
+        <router-link v-if="$auth.isAuthenticated" to="/orders"
+        >Orders</router-link>
       </q-list>
     </q-drawer>
 

@@ -40,10 +40,10 @@ export default {
     return apiClient.get(`/customers/facilities/${id}`);
   },
   getLineItems(ids) {
-    return apiClient.get(`/lineitems?${ids}`);
+    return apiClient.get(`/line-items?${ids}`);
   },
   getLineItem(id) {
-    return apiClient.get(`/lineitems/${id}`);
+    return apiClient.get(`/line-items/${id}`);
   },
   postCustomer(customer) {
     console.log("postCustomer is being called within apiService");
@@ -81,6 +81,7 @@ export default {
     console.log(newItem);
     return newItem;
   },
+  // putStock is incomplete. Most likely replace with patch
   putStock(stockUpdate) {
     return apiClient.put(`/stock/${stockUpdate.id}/update`, stockUpdate);
   }

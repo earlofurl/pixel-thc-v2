@@ -4,62 +4,62 @@
       <q-list>
         <q-item>
           <q-item-section>
-            Name
+            Name:
           </q-item-section>
         </q-item>
         <q-item>
           <q-item-section>
-            License
+            License:
           </q-item-section>
         </q-item>
         <q-item>
           <q-item-section>
-            Contact
+            Contact:
           </q-item-section>
         </q-item>
         <q-item>
           <q-item-section>
-            Phone
+            Phone:
           </q-item-section>
         </q-item>
         <q-item>
           <q-item-section>
-            Email
+            Email:
           </q-item-section>
         </q-item>
         <q-item>
           <q-item-section>
-            Address
+            Address:
           </q-item-section>
         </q-item>
         <q-item>
           <q-item-section>
-            Address
+            Address:
           </q-item-section>
         </q-item>
         <q-item>
           <q-item-section>
-            City
+            City:
           </q-item-section>
         </q-item>
         <q-item>
           <q-item-section>
-            State
+            State:
           </q-item-section>
         </q-item>
         <q-item>
           <q-item-section>
-            Zip
+            Zip:
           </q-item-section>
         </q-item>
         <q-item>
           <q-item-section>
-            County
+            County:
           </q-item-section>
         </q-item>
         <q-item>
           <q-item-section>
-            Notes
+            Notes:
           </q-item-section>
         </q-item>
       </q-list>

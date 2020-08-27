@@ -63,6 +63,59 @@ const routes = [
       }
     ]
   },
+  {
+    path: "/stock",
+    component: () => import("layouts/MainLayout.vue"),
+    children: [
+      {
+        path: "",
+        component: () => import("pages/Stock.vue"),
+        meta: {
+          requiresAuth: true
+        }
+      },
+      {
+        path: "create",
+        component: () => import("pages/StockCreate.vue"),
+        meta: {
+          requiresAuth: true
+        }
+      }
+    ]
+  },
+  {
+    path: "/orders",
+    component: () => import("layouts/MainLayout.vue"),
+    children: [
+      {
+        path: "",
+        component: () => import("pages/Orders.vue"),
+        meta: {
+          requiresAuth: true
+        }
+      },
+      {
+        path: "create",
+        component: () => import("pages/OrderCreate.vue"),
+        meta: {
+          requiresAuth: true
+        }
+      }
+    ]
+  },
+  {
+    path: "/orders/:id",
+    component: () => import("layouts/MainLayout.vue"),
+    children: [
+      {
+        path: "",
+        component: () => import("pages/OrderView.vue"),
+        meta: {
+          requiresAuth: true
+        }
+      }
+    ]
+  },
 
   // Always leave this as last one,
   // but you can also remove it
