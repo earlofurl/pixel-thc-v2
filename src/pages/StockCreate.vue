@@ -94,6 +94,7 @@
         console.log("createStock called in StockCreate.vue")
         this.stock.strain = this.stock.labResult.ProductName
         this.stock.batch = this.stock.labResult.TestBatch
+        this.stock.labTestId = this.stock.labResult.LabTestResultId
         this.$store
           .dispatch("stock/createStock", this.stock)
           .then(res => {

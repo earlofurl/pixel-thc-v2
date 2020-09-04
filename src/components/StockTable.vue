@@ -30,6 +30,9 @@
           </template>
         </q-input>
       </template>
+      <template v-slot:body-cell-batch="props">
+        <q-td :props="props">{{ getBatch(props.row.labResultId) }}</q-td>
+      </template>
       <template v-slot:body-cell-thcPercent="props">
         <q-td :props="props">{{ getThcPercent(props.row.labResultId) }}</q-td>
       </template>
@@ -99,25 +102,11 @@ export default {
           sortable: true
         },
         {
-          name: "quantity",
-          align: "center",
-          label: "Quantity",
-          field: "quantity",
-          style: "font-weight:bold",
-          sortable: true
-        },
-        {
-          name: "uom",
-          align: "center",
-          label: "UoM",
-          field: "uom",
-          sortable: true
-        },
-        {
           name: "thcPercent",
           align: "center",
           label: "THC %",
           field: "ThcPercent",
+          style: "font-weight:bold",
           sortable: true
         },
         {
@@ -132,6 +121,21 @@ export default {
           align: "center",
           label: "Terp %",
           field: "TerpenePercent",
+          sortable: true
+        },
+        {
+          name: "quantity",
+          align: "center",
+          label: "Quantity",
+          field: "quantity",
+          style: "font-weight:bold",
+          sortable: true
+        },
+        {
+          name: "uom",
+          align: "center",
+          label: "UoM",
+          field: "uom",
           sortable: true
         },
         {
@@ -168,19 +172,24 @@ export default {
     },
     getThcPercent(cid) {
       const labResults = this.labResultList;
-      const labResult = labResults.find(x => x.LabTestResultId === cid);
+      const labResult = labResults.find(x => x.LabTestId === cid);
       return labResult.ThcPercent
     },
     getCbdPercent(cid) {
       const labResults = this.labResultList;
-      const labResult = labResults.find(x => x.LabTestResultId === cid);
+      const labResult = labResults.find(x => x.LabTestId === cid);
       return labResult.CbdPercent
     },
     getTerpenePercent(cid) {
       const labResults = this.labResultList;
-      const labResult = labResults.find(x => x.LabTestResultId === cid);
+      const labResult = labResults.find(x => x.LabTestId === cid);
       return labResult.TerpenePercent
     },
+    getBatch(cid) {
+      const labResults = this.labResultList;
+      const labResult = labResults.find(x => x.LabTestId === cid);
+      return labResult.TestBatch
+    }
   },
 };
 </script>
