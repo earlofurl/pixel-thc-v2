@@ -31,16 +31,16 @@
         </q-input>
       </template>
       <template v-slot:body-cell-batch="props">
-        <q-td :props="props">{{ getBatch(props.row.labResultId) }}</q-td>
+        <q-td :props="props">{{ getBatch(props.row.labTestId) }}</q-td>
       </template>
       <template v-slot:body-cell-thcPercent="props">
-        <q-td :props="props">{{ getThcPercent(props.row.labResultId) }}</q-td>
+        <q-td :props="props">{{ getThcPercent(props.row.labTestId) }}</q-td>
       </template>
       <template v-slot:body-cell-cbdPercent="props">
-        <q-td :props="props">{{ getCbdPercent(props.row.labResultId) }}</q-td>
+        <q-td :props="props">{{ getCbdPercent(props.row.labTestId) }}</q-td>
       </template>
       <template v-slot:body-cell-terpenePercent="props">
-        <q-td :props="props">{{ getTerpenePercent(props.row.labResultId) }}</q-td>
+        <q-td :props="props">{{ getTerpenePercent(props.row.labTestId) }}</q-td>
       </template>
     </q-table>
   </div>
@@ -172,22 +172,22 @@ export default {
     },
     getThcPercent(cid) {
       const labResults = this.labResultList;
-      const labResult = labResults.find(x => x.LabTestId === cid);
+      const labResult = labResults.find(x => x.LabTestResultId === cid);
       return labResult.ThcPercent
     },
     getCbdPercent(cid) {
       const labResults = this.labResultList;
-      const labResult = labResults.find(x => x.LabTestId === cid);
+      const labResult = labResults.find(x => x.LabTestResultId === cid);
       return labResult.CbdPercent
     },
     getTerpenePercent(cid) {
       const labResults = this.labResultList;
-      const labResult = labResults.find(x => x.LabTestId === cid);
+      const labResult = labResults.find(x => x.LabTestResultId === cid);
       return labResult.TerpenePercent
     },
     getBatch(cid) {
       const labResults = this.labResultList;
-      const labResult = labResults.find(x => x.LabTestId === cid);
+      const labResult = labResults.find(x => x.LabTestResultId === cid);
       return labResult.TestBatch
     }
   },
