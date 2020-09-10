@@ -33,6 +33,19 @@
         </q-item>
         <q-item>
           <q-item-section>
+            <q-item-label class="q-pb-xs">Facility</q-item-label>
+            <q-select
+            dense
+            outlined
+            v-model="order.facility"
+            label="Facility"
+            :options="customerFacilities"
+            option-label="name"
+            ></q-select>
+          </q-item-section>
+        </q-item>
+        <q-item>
+          <q-item-section>
             <q-item-label class="q-pb-xs">Initial Status</q-item-label>
             <q-select dense outlined v-model="order.status" label="Initial Status" :options="orderStatuses" />
           </q-item-section>
@@ -111,6 +124,12 @@
       },
       newOrderItems() {
         return this.$store.state.order.newOrder
+      },
+      facilities() {
+        return this.$store.state.facility.facilities
+      },
+      customerFacilities() {
+        return this.$store.dispatch("facility/fetchFacilitiesByCustomer")
       }
     },
     methods: {
@@ -139,6 +158,7 @@
           customer: null,
           status: 'OPEN',
           orderItems: [],
+          facility: null
         };
       },
       // filterFn (val, update) {

@@ -16,6 +16,7 @@ export default {
     this.$store.dispatch("order/fetchOrders");
     this.$store.dispatch("customer/fetchCustomers");
     this.$store.dispatch("lab/fetchLabs");
+    this.$store.dispatch("facility/fetchFacilities");
   }
 };
 </script>

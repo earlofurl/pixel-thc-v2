@@ -28,13 +28,13 @@
         </q-input>
       </template>
       <template v-slot:body-cell-thcPercent="props">
-        <q-td :props="props">{{ getThcPercent(props.row.labResultId) }}</q-td>
+        <q-td :props="props">{{ getThcPercent(props.row.labTestId) }}</q-td>
       </template>
       <template v-slot:body-cell-cbdPercent="props">
-        <q-td :props="props">{{ getCbdPercent(props.row.labResultId) }}</q-td>
+        <q-td :props="props">{{ getCbdPercent(props.row.labTestId) }}</q-td>
       </template>
       <template v-slot:body-cell-terpenePercent="props">
-        <q-td :props="props">{{ getTerpenePercent(props.row.labResultId) }}</q-td>
+        <q-td :props="props">{{ getTerpenePercent(props.row.labTestId) }}</q-td>
       </template>
     </q-table>
     <q-dialog v-model="card">
@@ -246,7 +246,8 @@
       mutateStockIntoLineItem(stockItem, quantity, ppu) {
         const original = stockItem
         let newItem = {}
-        newItem.name = original.itemType + " " + original.strain
+        newItem.strain = original.strain
+        newItem.itemType = original.itemType
         newItem.stock = original.id
         newItem.notes = original.notes
         newItem.quantity = quantity

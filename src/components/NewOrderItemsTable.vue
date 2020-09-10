@@ -54,10 +54,18 @@
         ],
         columns: [
           {
-            name: "name",
+            name: "strain",
             align: "center",
-            label: "Name",
-            field: "name",
+            label: "Strain",
+            field: "strain",
+            style: "font-weight:bold",
+            sortable: true
+          },
+          {
+            name: "itemType",
+            align: "center",
+            label: "Item Type",
+            field: "itemType",
             style: "font-weight:bold",
             sortable: true
           },

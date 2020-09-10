@@ -5,6 +5,7 @@ import lab from "./lab";
 import lineItem from "./lineItem";
 import order from "./order";
 import stock from "./stock";
+import facility from "./facility";
 
 // import example from './module-example'
 
@@ -26,7 +27,8 @@ export default function(/* { ssrContext } */) {
       lab,
       lineItem,
       order,
-      stock
+      stock,
+      facility
     },
 
     // enable strict mode (adds overhead!)
