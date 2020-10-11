@@ -129,13 +129,21 @@
         return this.$store.state.facility.facilities
       },
       customerFacilities() {
-        return this.$store.dispatch("facility/fetchFacilitiesByCustomer")
+        if (this.order.customer !== null) {
+          let facs = []
+          let cid = this.order.customer.id
+          facs.push(this.$store.state.facility.facilities.find(x => x.id === cid))
+          return facs
+        } else {
+          return []
+        }
       }
     },
     methods: {
       createOrder() {
         console.log("createOrder called in OrderCreate.vue")
         this.order.lineItems = this.newOrderItems
+        this.order.facility = this.order.facility.id
         this.$store
           .dispatch("order/createOrder", this.order)
           .then(res => {

@@ -248,7 +248,8 @@
         let newItem = {}
         newItem.strain = original.strain
         newItem.itemType = original.itemType
-        newItem.stock = original.id
+        newItem.stockId = original.id
+        newItem.orderId = 2
         newItem.notes = original.notes
         newItem.quantity = quantity
         newItem.ppu = ppu

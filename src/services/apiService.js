@@ -34,10 +34,13 @@ export default {
     return apiClient.get(`/customers/${id}`);
   },
   getFacilities() {
-    return apiClient.get("/customers/facilities");
+    return apiClient.get("/facilities");
   },
   getFacility(id) {
     return apiClient.get(`/customers/facilities/${id}`);
+  },
+  getFacilitiesByCustomer(id) {
+    return apiClient.get(`/customers/${id}/facilities`);
   },
   getLineItems(ids) {
     return apiClient.get(`/line-items?${ids}`);
@@ -77,7 +80,7 @@ export default {
     return apiClient.post("/orders", order);
   },
   async postLineItems(lineItems) {
-    let newItem = await apiClient.post("/lineItems", lineItems);
+    let newItem = await apiClient.post("/line-items", lineItems);
     console.log(newItem);
     return newItem;
   },
