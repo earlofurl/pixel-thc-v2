@@ -110,25 +110,26 @@
     components: {OrderCreationStockTable, OrderCreationTable },
     data() {
       return {
-        order: {},
-        customer: null,
+        order: {}, // initialize empty order object
+        customer: null, // initialize with no customer object selected
         // status: 'OPEN',
-        orderStatuses: [
+        orderStatuses: [ // pre-load status select with possible statuses
           'OPEN', 'PACKED', 'SHIPPED', 'DELIVERED', 'CANCELLED'
         ]
       };
     },
     computed: {
       customers() {
-        return this.$store.state.customer.customers
+        return this.$store.state.customer.customers // options for customer select
       },
       newOrderItems() {
-        return this.$store.state.order.newOrder
+        return this.$store.state.order.newOrder // initialize array for new line-item objects to be added to new order
       },
       facilities() {
-        return this.$store.state.facility.facilities
+        return this.$store.state.facility.facilities // options for facility select
       },
       customerFacilities() {
+        // compute the facilities associated with selected customer after customer is selected
         if (this.order.customer !== null) {
           let facs = []
           let cid = this.order.customer.id
@@ -141,20 +142,20 @@
     },
     methods: {
       createOrder() {
-        console.log("createOrder called in OrderCreate.vue")
-        this.order.lineItems = this.newOrderItems
-        this.order.facility = this.order.facility.id
+        console.log("createOrder called in OrderCreate.vue") // debug
+        this.order.lineItems = this.newOrderItems // move the newOrderItems array into the new order object
+        this.order.facilityId = this.order.facility.id // set the facilityId that will be passed to the backend
         this.$store
-          .dispatch("order/createOrder", this.order)
+          .dispatch("order/createOrder", this.order) // pass order object to the createOrder action in store
           .then(res => {
-            for (let item in this.order.lineItems) {
-              let lineItemData = this.order.lineItems[item]
-              let stockUpdateData = this.$store.state.stock.stocks.find(x => x.id === lineItemData.stock)
-              this.$store.dispatch("stock/putStock", stockUpdateData)
+            for (let item in this.order.lineItems) { // iterate through lineItems array
+              let lineItemData = this.order.lineItems[item] // select a single line item object
+              let stockUpdateData = this.$store.state.stock.stocks.find(x => x.id === lineItemData.stockId) // select stock object parent of line-item object using stockId from line-item object
+              this.$store.dispatch("stock/putStock", stockUpdateData) // dispatch putStock action in store to adjust stock quantity in backend
             }
-            this.order = this.createFreshOrderObject();
-            this.$store.dispatch("order/createFreshNewOrderObject")
-            this.$router.push('/orders')
+            this.order = this.createFreshOrderObject(); // after receiving positive response, create a new order object to refresh form
+            this.$store.dispatch("order/createFreshNewOrderObject") // create new order object in store state as well. Are both of these necessary?
+            this.$router.push('/orders') // return user to order table
 
           });
       },

@@ -62,17 +62,30 @@ export default {
   postStock(stock) {
     return apiClient.post("/stock", stock);
   },
+
+  // TODO: refactor postOrder to push the entire order object to the backend. Use nested write to create lineItems and connect to order.
   async postOrder(order) {
     console.log("postOrder is being called within apiService");
     console.log(order);
-    console.log("postLineItems being called within PostOrder apiService");
-    for (let item in order.lineItems) {
-      console.log(`Item #${item} is: ${order.lineItems[item]}`);
-      await this.postLineItems(order.lineItems[item]).then(res => {
-        console.log(res);
-        order.lineItems[item] = res.data;
-      });
-    }
+    // console.log("postLineItems being called within PostOrder apiService");
+    // for (let item in order.lineItems) {
+    //   console.log(`Item #${item} is: ${order.lineItems[item]}`);
+    //   await this.postLineItems(order.lineItems[item]).then(res => {
+    //     console.log(res);
+    //     order.lineItems[item] = res.data;
+    //   });
+    // }
+    // async postOrder(order) {
+    //   console.log("postOrder is being called within apiService");
+    //   console.log(order);
+    //   console.log("postLineItems being called within PostOrder apiService");
+    //   for (let item in order.lineItems) {
+    //     console.log(`Item #${item} is: ${order.lineItems[item]}`);
+    //     await this.postLineItems(order.lineItems[item]).then(res => {
+    //       console.log(res);
+    //       order.lineItems[item] = res.data;
+    //     });
+    //   }
     // console.log(order.lineItems[0]); // TODO: going to need to deal with Array programmatically
 
     // // console.log("This is the order being posted: ");
