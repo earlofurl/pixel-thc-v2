@@ -12,15 +12,15 @@
   "dependencies": {
     "@auth0/auth0-spa-js": "^1.11.0",
     "@aws-amplify/ui-vue": "^0.2.14",
-    "@quasar/extras": "^1.0.0",
+    "@quasar/extras": "1.9.9",
     "aws-amplify": "^3.0.24",
     "aws-amplify-vue": "^2.1.2",
     "axios": "^0.18.1",
     "core-js": "^3.6.5",
-    "quasar": "^1.0.0"
+    "quasar": "1.14.1"
   },
   "devDependencies": {
-    "@quasar/app": "^2.0.0",
+    "@quasar/app": "2.1.1",
     "babel-eslint": "^10.0.1",
     "eslint": "^6.8.0",
     "eslint-config-prettier": "^6.9.0",

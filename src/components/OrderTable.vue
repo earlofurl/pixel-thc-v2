@@ -17,9 +17,9 @@
       </template>
 
       <template v-slot:body-cell-customer="props">
-        <!-- <p>Hi</p> -->
-        <q-td :props="props">{{ getCustomerName(props.row.customerId) }}</q-td>
+        <q-td :props="props">{{ getCustomerNameFromFacility(props.row.facilityId) }}</q-td>
       </template>
+
     </q-table>
   </div>
 </template>
@@ -48,7 +48,7 @@ export default {
           name: "customer",
           align: "center",
           label: "Customer",
-          field: "customerId",
+          field: "facilityId",
           style: "font-weight:bold",
           sortable: true
         },
@@ -92,6 +92,9 @@ export default {
     },
     customer() {
       return this.$store.state.customer.customers;
+    },
+    facility() {
+      return this.$store.state.facility.facilities;
     }
   },
   methods: {
@@ -107,10 +110,12 @@ export default {
         .then(this.$store.dispatch("customer/fetchCustomer", row.customerId))
         .finally(this.$router.push(`/orders/${row.id}`));
     },
-    getCustomerName(cid) {
+    getCustomerNameFromFacility(facilityId) {
+      const facilities = this.facility;
       const custies = this.customer;
-      const custie = custies.find(x => x.id === cid);
-      return custie.name;
+      const facility = facilities.find(x => x.id === facilityId);
+      const customer = custies.find(x => x.id === facility.customerId);
+      return customer.name;
     },
     onAddClick(evt) {
       this.$router.push("/orders/create");
