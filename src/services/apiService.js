@@ -100,5 +100,9 @@ export default {
   // putStock is incomplete. Most likely replace with patch
   putStock(stockUpdate) {
     return apiClient.put(`/stock/${stockUpdate.id}/update`, stockUpdate);
+  },
+  async getLineItemsByOrderId(orderId) {
+    let lineItems = await apiClient.get(`/line-items/order/${orderId}`);
+    return lineItems;
   }
 };

@@ -21,8 +21,15 @@ export function fetchLineItems({ commit }, ids) {
     });
 }
 
+export function fetchLineItemsByOrder({ commit, getters, state }, orderId) {
+  return apiService.getLineItemsByOrderId(orderId).then(response => {
+    commit("SET_LINEITEMS", response.data);
+    return response.data;
+  });
+}
+
 export function fetchLineItem({ commit, getters, state }, id) {
-  if (id == state.lineItem.id) {
+  if (id === state.lineItem.id) {
     return state.lineItem;
   }
 

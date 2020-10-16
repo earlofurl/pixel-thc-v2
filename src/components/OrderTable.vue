@@ -102,12 +102,9 @@ export default {
       await this.$store
         .dispatch("order/fetchOrder", row.id)
         .then(res => {
-          this.$store.dispatch(
-            "lineItem/fetchLineItems",
-            this.$store.state.order.order.lineItemIds
-          );
+          this.$store.dispatch("lineItem/fetchLineItemsByOrder", row.id);
         })
-        .then(this.$store.dispatch("customer/fetchCustomer", row.customerId))
+        .then(this.$store.dispatch("facility/fetchFacility", row.facilityId))
         .finally(this.$router.push(`/orders/${row.id}`));
     },
     getCustomerNameFromFacility(facilityId) {
