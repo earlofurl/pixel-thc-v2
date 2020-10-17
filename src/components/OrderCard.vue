@@ -2,11 +2,11 @@
   <div>
     <q-card>
       <q-card-section>
-        <p>{{ customer.name }}</p>
-        <p>{{ customer.contactName }}</p>
-        <p>{{ customer.email }}</p>
-        <p>{{ customer.phone }}</p>
-        <p>{{ customer.notes }}</p>
+        <p>{{ facility.name }}</p>
+        <p>{{ facility.contactName }}</p>
+        <p>{{ facility.email }}</p>
+        <p>{{ facility.phone }}</p>
+        <p>{{ facility.notes }}</p>
       </q-card-section>
     </q-card>
   </div>
@@ -22,8 +22,8 @@ export default {
     order() {
       return this.$store.state.order.order;
     },
-    customer() {
-      return this.$store.state.customer.customer;
+    facility() {
+      return this.$store.state.facility.facility;
     }
   }
 };

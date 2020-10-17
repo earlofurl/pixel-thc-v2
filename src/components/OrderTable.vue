@@ -5,12 +5,11 @@
       :data="orders"
       :columns="columns"
       color="primary"
-      :row-key="id"
+      :row-key="this.orders.id"
       separator="horizontal"
       :pagination.sync="pagination"
       :loading="loading"
       @row-click="onRowClick"
-      @addToOrderTable="addToOrderTable"
     >
       <template v-slot:top-right>
         <q-btn @click="onAddClick" color="primary" label="Add New" class="q-mr-xs" />
@@ -104,8 +103,8 @@ export default {
         .then(res => {
           this.$store.dispatch("lineItem/fetchLineItemsByOrder", row.id);
         })
-        .then(this.$store.dispatch("facility/fetchFacility", row.facilityId))
-        .finally(this.$router.push(`/orders/${row.id}`));
+        .then(await this.$store.dispatch("facility/fetchFacility", row.facilityId))
+        .then(this.$router.push(`/orders/${row.id}`));
     },
     getCustomerNameFromFacility(facilityId) {
       const facilities = this.facility;

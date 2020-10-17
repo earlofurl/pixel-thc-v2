@@ -19,14 +19,17 @@ export default {
       return this.$store.state.order.order;
     },
     lineItems() {
-      let lineItemsArray = []
-      const items = this.order.lineItemIds
-      for (let i = 0, len = items.length; i < len; i++) {
-        lineItemsArray.push(this.$store.state.lineItem.lineItems.find(x => x.id === items[i]))
-      }
-      console.log(lineItemsArray)
-      return lineItemsArray
+      return this.$store.state.order.order.lineItems;
     },
+    // lineItems() {
+    //   let lineItemsArray = []
+    //   const items = this.order.lineItemIds
+    //   for (let i = 0, len = items.length; i < len; i++) {
+    //     lineItemsArray.push(this.$store.state.lineItem.lineItems.find(x => x.id === items[i]))
+    //   }
+    //   console.log(lineItemsArray)
+    //   return lineItemsArray
+    // },
     orderTotal() {
       const data = this.lineItems
       return data.reduce((acc, item) => acc + parseFloat(item.quantity * item.ppu), 0);

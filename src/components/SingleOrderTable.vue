@@ -14,8 +14,6 @@
 </template>
 
 <script>
-// TODO: Add calculated price total to totals field.
-// TODO: Using a card for order total rather than incorporating it in table.
 import store from "../store";
 
 export default {
@@ -40,10 +38,18 @@ export default {
         //   sort: (a, b, rowA, rowB) => parseInt(a, 10) - parseInt(b, 10)
         // },
         {
-          name: "name",
+          name: "strain",
           align: "center",
-          label: "Product",
-          field: "name",
+          label: "Strain",
+          field: "strain",
+          style: "font-weight:bold",
+          sortable: true
+        },
+        {
+          name: "itemType",
+          align: "center",
+          label: "Item Type",
+          field: "itemType",
           style: "font-weight:bold",
           sortable: true
         },
@@ -78,14 +84,17 @@ export default {
       return this.$store.state.order.order;
     },
     lineItems() {
-      let lineItemsArray = []
-      const items = this.order.lineItemIds
-      for (let i = 0, len = items.length; i < len; i++) {
-        lineItemsArray.push(this.$store.state.lineItem.lineItems.find(x => x.id === items[i]))
-      }
-      console.log(lineItemsArray)
-      return lineItemsArray
-    },
+      return this.$store.state.order.order.lineItems
+    }
+    // lineItems() {
+    //   let lineItemsArray = []
+    //   const items = this.order.lineItemIds
+    //   for (let i = 0, len = items.length; i < len; i++) {
+    //     lineItemsArray.push(this.$store.state.lineItem.lineItems.find(x => x.id === items[i]))
+    //   }
+    //   console.log(lineItemsArray)
+    //   return lineItemsArray
+    // },
   }
 };
 </script>

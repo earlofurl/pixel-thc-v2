@@ -131,13 +131,13 @@
       customerFacilities() {
         // compute the facilities associated with selected customer after customer is selected
         if (this.order.customer !== null) {
-          let facs = []
           let cid = this.order.customer.id
-          facs.push(this.$store.state.facility.facilities.find(x => x.id === cid))
-          return facs
+          return this.$store.state.facility.facilities.filter(x => x.customerId === cid)
         } else {
           return []
         }
+          // facilities.push())
+          // return facilities
       }
     },
     methods: {
