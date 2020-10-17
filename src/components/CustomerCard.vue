@@ -5,15 +5,9 @@
 <!--           :src="this.bucketLink + customer.photoPrimary"-->
 <!--      />-->
       <q-card-section>
-        <div class="text-h6">{{ facility.name }}</div>
+        <div class="text-h6">{{ customer.name }}</div>
       </q-card-section>
-      <q-card-section>
-        <div class="text-subtitle2">{{ facility.address1 }}</div>
-        <div class="text-subtitle2">{{ facility.contactName }}</div>
-        <div class="text-subtitle2">{{ facility.email }}</div>
-        <div class="text-subtitle2">{{ facility.phone }}</div>
-      </q-card-section>
-      <q-card-section>{{ facility.notes }}</q-card-section>
+      <q-card-section>{{ customer.notes }}</q-card-section>
     </q-card>
   </div>
 </template>
@@ -29,8 +23,8 @@ export default {
     }
   },
   computed: {
-    facility() {
-      return this.$store.state.facility.facility.facility;
+    customer() {
+      return this.$store.state.customer.customer;
     }
   }
 };
