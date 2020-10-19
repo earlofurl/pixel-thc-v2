@@ -63,44 +63,26 @@ export default {
     return apiClient.post("/stock", stock);
   },
 
-  // TODO: refactor postOrder to push the entire order object to the backend. Use nested write to create lineItems and connect to order.
   async postOrder(order) {
     console.log("postOrder is being called within apiService");
     console.log(order);
-    // console.log("postLineItems being called within PostOrder apiService");
-    // for (let item in order.lineItems) {
-    //   console.log(`Item #${item} is: ${order.lineItems[item]}`);
-    //   await this.postLineItems(order.lineItems[item]).then(res => {
-    //     console.log(res);
-    //     order.lineItems[item] = res.data;
-    //   });
-    // }
-    // async postOrder(order) {
-    //   console.log("postOrder is being called within apiService");
-    //   console.log(order);
-    //   console.log("postLineItems being called within PostOrder apiService");
-    //   for (let item in order.lineItems) {
-    //     console.log(`Item #${item} is: ${order.lineItems[item]}`);
-    //     await this.postLineItems(order.lineItems[item]).then(res => {
-    //       console.log(res);
-    //       order.lineItems[item] = res.data;
-    //     });
-    //   }
-    // console.log(order.lineItems[0]); // TODO: going to need to deal with Array programmatically
-
-    // // console.log("This is the order being posted: ");
-    // // console.log(order);
     return apiClient.post("/orders", order);
   },
+
   async postLineItems(lineItems) {
     let newItem = await apiClient.post("/line-items", lineItems);
     console.log(newItem);
     return newItem;
   },
-  // putStock is incomplete. Most likely replace with patch
-  putStock(stockUpdate) {
-    return apiClient.put(`/stock/${stockUpdate.id}/update`, stockUpdate);
+  // // putStock is incomplete. Most likely replace with patch
+  // putStock(stockUpdate) {
+  //   return apiClient.put(`/stock/${stockUpdate.id}/update`, stockUpdate);
+  // },
+
+  patchStock(stockPatch) {
+    return apiClient.patch(`/stock/${stockPatch.id}/update`, stockPatch);
   },
+
   async getLineItemsByOrderId(orderId) {
     let lineItems = await apiClient.get(`/line-items/order/${orderId}`);
     return lineItems;

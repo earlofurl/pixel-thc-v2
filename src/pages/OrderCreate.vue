@@ -151,7 +151,10 @@
             for (let item in this.order.lineItems) { // iterate through lineItems array
               let lineItemData = this.order.lineItems[item] // select a single line item object
               let stockUpdateData = this.$store.state.stock.stocks.find(x => x.id === lineItemData.stockId) // select stock object parent of line-item object using stockId from line-item object
-              this.$store.dispatch("stock/putStock", stockUpdateData) // dispatch putStock action in store to adjust stock quantity in backend
+              let stockUpdatePatch = {}
+              stockUpdatePatch.id = stockUpdateData.id
+              stockUpdatePatch.quantity = stockUpdateData.quantity
+              this.$store.dispatch("stock/patchStock", stockUpdatePatch) // dispatch putStock action in store to adjust stock quantity in backend
             }
             this.order = this.createFreshOrderObject(); // after receiving positive response, create a new order object to refresh form
             this.$store.dispatch("order/createFreshNewOrderObject") // create new order object in store state as well. Are both of these necessary?

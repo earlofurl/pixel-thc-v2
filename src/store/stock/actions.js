@@ -46,6 +46,10 @@ export function putStock({ commit, state }, stock) {
   return apiService.putStock(stock);
 }
 
+export function patchStock({ commit, state }, stockPatch) {
+  return apiService.patchStock(stockPatch);
+}
+
 export function adjustStockQuantity({ commit, state }, row) {
   // console.log(row.quantity)
   // const stockItem = state.stocks.find(x => x.id === row.stock);
