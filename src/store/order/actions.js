@@ -61,3 +61,10 @@ export function clearNewOrderTable({ commit, state }) {
 export function removeNewItem({ commit, state }, newOrderItem) {
   commit("REMOVE_NEW_ITEM");
 }
+
+export function changeOrderStatus({ commit, state }, id, status) {
+  return apiService.patchOrderStatus(id, status).then(response => {
+    console.log(response.data);
+    // commit("SET_ORDER", response.data);
+  });
+}

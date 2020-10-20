@@ -45,3 +45,15 @@ export function fetchLineItem({ commit, getters, state }, id) {
     });
   }
 }
+
+export async function changeLineItemStatus(
+  { commit, getters, state },
+  id,
+  status
+) {
+  return apiService.changeLineItemStatus(id, status).then(response => {
+    console.log(response.data);
+    commit("SET_LINEITEM", response.data);
+    return response.data;
+  });
+}

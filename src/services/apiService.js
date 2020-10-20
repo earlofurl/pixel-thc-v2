@@ -86,5 +86,21 @@ export default {
   async getLineItemsByOrderId(orderId) {
     let lineItems = await apiClient.get(`/line-items/order/${orderId}`);
     return lineItems;
+  },
+
+  async changeLineItemStatus(id, status) {
+    console.log(status);
+    let statusChange = await apiClient.patch(
+      `/line-items/${id}/update`,
+      status
+    );
+    console.log(statusChange);
+    return statusChange;
+  },
+
+  async patchOrderStatus(id, status) {
+    let statusChange = await apiClient.patch(`/orders/${id}/update`, status);
+    console.log("statusChange " + statusChange);
+    return statusChange;
   }
 };

@@ -9,7 +9,15 @@
       separator="horizontal"
       :pagination.sync="pagination"
       :loading="loading"
-    ></q-table>
+    >
+          <template v-slot:body-cell-packStatus="props">
+            <q-checkbox v-model="props.row.packedStatus" v-on:click.native="changeLineItemStatus(props.row.id, props.row.packedStatus)"></q-checkbox>
+          </template>
+
+<!--      <template v-slot:body-cell-packStatus="props">-->
+<!--        <i :props="props" :class="props.row.packedStatus?'fas fa-check-square fa-lg':'fas fa-times-circle fa-lg'" :style="props.row.packedStatus?'color:Green;font-size:24px':'color:Red;font-size:24px'"></i>-->
+<!--      </template>-->
+    </q-table>
   </div>
 </template>
 
@@ -22,6 +30,7 @@ export default {
     return {
       title: "Single Order Table",
       loading: false,
+      orderIsPacked: false,
       pagination: {
         rowsPerPage: 20,
         sortBy: "name",
@@ -75,6 +84,16 @@ export default {
           field: row => row.quantity * row.ppu,
           format: val => `$${val}`,
           sortable: true
+        },
+        {
+          name: "packStatus",
+          align: "center",
+          label: "Pack Status",
+          field: "packedStatus",
+          // classes (val) {
+          //   return val.packedStatus==true ? "fas fa-check-square" : "fas fa-times-circle"
+          // },
+          sortable: true
         }
       ]
     };
@@ -85,7 +104,15 @@ export default {
     },
     lineItems() {
       return this.$store.state.order.order.lineItems
-    }
+    },
+    // orderIsPacked() {
+    //   const lineItems = this.lineItems
+    //   const lineItemsPacked = lineItems.packedStatus.every(e => {
+    //     return e === true
+    //   })
+    //   console.log(lineItemsPacked)
+    //   return lineItemsPacked;
+    // }
     // lineItems() {
     //   let lineItemsArray = []
     //   const items = this.order.lineItemIds
@@ -95,6 +122,32 @@ export default {
     //   console.log(lineItemsArray)
     //   return lineItemsArray
     // },
+  },
+  methods: {
+    // TODO: This is almost working correctly. Changing lineItemStatus on its own and pushing to backend is working.
+    // TODO: Checking for orderStatus and pushing that to the backend is not working and is also interfering with
+    // TODO: the lineItemStatus process. Revert back to working lineItemStatus and then puzzle forward from there.
+    async changeLineItemStatus(id, status) {
+      console.log(id, status);
+      await this.$store.dispatch("lineItem/changeLineItemStatus", id, status).then(response => {
+        const items = this.lineItems
+        let itemsPacked = []
+        items.forEach(item => {
+          itemsPacked.push(item.packedStatus);
+        })
+        console.log(itemsPacked)
+        let allPacked = itemsPacked.every(e => {
+          return e === true
+        })
+        console.log(allPacked)
+        allPacked === true ? this.changeOrderStatus('PACKED') : this.changeOrderStatus('OPEN')
+      })
+    },
+    async changeOrderStatus(status) {
+      const id = this.order.id
+      console.log(`This will change the status of Order #${id} to ${status}.`)
+      await this.$store.dispatch("order/changeOrderStatus", id, status)
+    }
   }
 };
 </script>
