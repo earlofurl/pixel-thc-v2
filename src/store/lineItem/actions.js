@@ -48,9 +48,10 @@ export function fetchLineItem({ commit, getters, state }, id) {
 
 export async function changeLineItemStatus(
   { commit, getters, state },
-  id,
-  status
+  { id, status }
 ) {
+  console.log(id, status);
+  status = { packedStatus: status };
   return apiService.changeLineItemStatus(id, status).then(response => {
     console.log(response.data);
     commit("SET_LINEITEM", response.data);

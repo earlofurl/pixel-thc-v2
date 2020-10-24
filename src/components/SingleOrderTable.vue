@@ -14,9 +14,6 @@
             <q-checkbox v-model="props.row.packedStatus" v-on:click.native="changeLineItemStatus(props.row.id, props.row.packedStatus)"></q-checkbox>
           </template>
 
-<!--      <template v-slot:body-cell-packStatus="props">-->
-<!--        <i :props="props" :class="props.row.packedStatus?'fas fa-check-square fa-lg':'fas fa-times-circle fa-lg'" :style="props.row.packedStatus?'color:Green;font-size:24px':'color:Red;font-size:24px'"></i>-->
-<!--      </template>-->
     </q-table>
   </div>
 </template>
@@ -129,20 +126,42 @@ export default {
     // TODO: the lineItemStatus process. Revert back to working lineItemStatus and then puzzle forward from there.
     async changeLineItemStatus(id, status) {
       console.log(id, status);
-      await this.$store.dispatch("lineItem/changeLineItemStatus", id, status).then(response => {
-        const items = this.lineItems
-        let itemsPacked = []
-        items.forEach(item => {
-          itemsPacked.push(item.packedStatus);
-        })
-        console.log(itemsPacked)
-        let allPacked = itemsPacked.every(e => {
-          return e === true
-        })
-        console.log(allPacked)
-        allPacked === true ? this.changeOrderStatus('PACKED') : this.changeOrderStatus('OPEN')
-      })
+      await this.$store.dispatch("lineItem/changeLineItemStatus", {id, status})
     },
+    // async changeLineItemStatus(id, status) { // pass id and status params from row props on click of checkbox
+    //   console.log(id, status);
+    //   await this.$store.dispatch("lineItem/changeLineItemStatus", id, status).then(response => { // pass request to store and await response
+    //     const items = this.lineItems // set lineItems array in var items
+    //     let itemsPacked = [] // initialize array for analyzing whether item is packed or not
+    //     items.forEach(item => { // iterate through items array and add packed status to itemsPacked array
+    //       itemsPacked.push(item.packedStatus);
+    //     })
+    //     console.log(itemsPacked)
+    //     let allPacked = itemsPacked.every(e => { // check if every packed status is true
+    //       return e === true
+    //     })
+    //     console.log(allPacked)
+    //     // if every item status is packed = true, then change overall status of order to 'PACKED', else change to 'OPEN'
+    //     // TODO: add condition where instead of changing to 'OPEN' if already open, just do nothing, else change back to 'OPEN' in case status was previously 'PACKED'
+    //     allPacked === true ? this.changeOrderStatus('PACKED') : this.changeOrderStatus('OPEN')
+    //   })
+    // },
+    // async changeLineItemStatus(id, status) {
+    //   console.log(id, status);
+    //   await this.$store.dispatch("lineItem/changeLineItemStatus", id, status).then(response => {
+    //     const items = this.lineItems
+    //     let itemsPacked = []
+    //     items.forEach(item => {
+    //       itemsPacked.push(item.packedStatus);
+    //     })
+    //     console.log(itemsPacked)
+    //     let allPacked = itemsPacked.every(e => {
+    //       return e === true
+    //     })
+    //     console.log(allPacked)
+    //     allPacked === true ? this.changeOrderStatus('PACKED') : this.changeOrderStatus('OPEN')
+    //   })
+    // },
     async changeOrderStatus(status) {
       const id = this.order.id
       console.log(`This will change the status of Order #${id} to ${status}.`)
