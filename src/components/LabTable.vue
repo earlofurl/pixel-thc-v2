@@ -87,6 +87,7 @@ name: "LabTable",
       {name: "cbd_percent", label: "CBD%", field: "CbdPercent"},
       {name: "terp_percent", label: "Terp%", field: "TerpenePercent"},
       {name: "test_id", label: "Test ID", field: "LabTestExternalId"},
+      {name: "test_date", label: "Test Date", field: "TestPerformedDate", format: val => val.substring(0,10)},
       {
         name: "grow_name",
         label: "Grow Name",

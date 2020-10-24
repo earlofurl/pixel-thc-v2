@@ -21,6 +21,8 @@
 <script>
 import store from "../store";
 
+// TODO: Rows sometimes switch position after packed checkbox is clicked.
+
 export default {
   name: "SingleOrderTable",
   data() {
@@ -30,7 +32,7 @@ export default {
       orderIsPacked: false,
       pagination: {
         rowsPerPage: 20,
-        sortBy: "name",
+        sortBy: "itemType",
         descending: false
       },
       columns: [

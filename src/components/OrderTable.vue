@@ -16,8 +16,12 @@
       </template>
 
       <template v-slot:body-cell-customer="props">
-        <q-td :props="props">{{ getCustomerNameFromFacility(props.row.facilityId) }}</q-td>
+        <q-td :props="props">{{ getFacilityName(props.row.facilityId) }}</q-td>
       </template>
+
+<!--      <template v-slot:body-cell-customer="props">-->
+<!--        <q-td :props="props">{{ getCustomerNameFromFacility(props.row.facilityId) }}</q-td>-->
+<!--      </template>-->
 
     </q-table>
   </div>
@@ -106,13 +110,18 @@ export default {
         .then(await this.$store.dispatch("facility/fetchFacility", row.facilityId))
         .then(this.$router.push(`/orders/${row.id}`));
     },
-    getCustomerNameFromFacility(facilityId) {
+    getFacilityName(facilityId) {
       const facilities = this.facility;
-      const custies = this.customer;
       const facility = facilities.find(x => x.id === facilityId);
-      const customer = custies.find(x => x.id === facility.customerId);
-      return customer.name;
+      return facility.name;
     },
+    // getCustomerNameFromFacility(facilityId) {
+    //   const facilities = this.facility;
+    //   const custies = this.customer;
+    //   const facility = facilities.find(x => x.id === facilityId);
+    //   const customer = custies.find(x => x.id === facility.customerId);
+    //   return customer.name;
+    // },
     onAddClick(evt) {
       this.$router.push("/orders/create");
     },

@@ -10,7 +10,6 @@
       separator="horizontal"
       :pagination.sync="pagination"
       :loading="loading"
-      dense="dense"
       :filter="filter"
     >
 <!--      Good chance I'm going to want to move the location of this button-->
@@ -65,7 +64,7 @@ export default {
       loading: false,
       pagination: {
         rowsPerPage: 20,
-        sortBy: "strain",
+        sortBy: "item-type",
         descending: false
       },
       columns: [
