@@ -126,7 +126,21 @@ export default {
     // TODO: the lineItemStatus process. Revert back to working lineItemStatus and then puzzle forward from there.
     async changeLineItemStatus(id, status) {
       console.log(id, status);
-      await this.$store.dispatch("lineItem/changeLineItemStatus", {id, status})
+      await this.$store.dispatch("lineItem/changeLineItemStatus", {id, status}).then(response => { // pass request to store and await response
+              const items = this.lineItems // set lineItems array in var items
+              let itemsPacked = [] // initialize array for analyzing whether item is packed or not
+              items.forEach(item => { // iterate through items array and add packed status to itemsPacked array
+                itemsPacked.push(item.packedStatus);
+              })
+              console.log(itemsPacked)
+              let allPacked = itemsPacked.every(e => { // check if every packed status is true
+                return e === true
+              })
+              console.log(allPacked)
+              // if every item status is packed = true, then change overall status of order to 'PACKED', else change to 'OPEN'
+              // TODO: add condition where instead of changing to 'OPEN' if already open, just do nothing, else change back to 'OPEN' in case status was previously 'PACKED'
+              allPacked === true ? this.changeOrderStatus('PACKED') : this.changeOrderStatus('OPEN')
+            })
     },
     // async changeLineItemStatus(id, status) { // pass id and status params from row props on click of checkbox
     //   console.log(id, status);
@@ -165,7 +179,7 @@ export default {
     async changeOrderStatus(status) {
       const id = this.order.id
       console.log(`This will change the status of Order #${id} to ${status}.`)
-      await this.$store.dispatch("order/changeOrderStatus", id, status)
+      await this.$store.dispatch("order/changeOrderStatus", {id, status})
     }
   }
 };
