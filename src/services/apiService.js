@@ -15,6 +15,9 @@ export default {
   getLabResults() {
     return apiClient.get("/lab");
   },
+  getCurrentLabResults() {
+    return apiClient.get("lab?current=true");
+  },
   getPackages() {
     return apiClient.get("/packages");
   },

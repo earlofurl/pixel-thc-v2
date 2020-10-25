@@ -1,6 +1,6 @@
 <template>
   <div class="q-pa-md">
-    <StockTable />
+    <StockTable/>
   </div>
 </template>
 
@@ -13,6 +13,7 @@
     created() {
       this.$store.dispatch("stock/fetchStock");
       this.$store.dispatch("lab/fetchLabs");
+      this.$store.dispatch("lab/fetchCurrentLabs")
     }
   }
 </script>

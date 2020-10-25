@@ -11,3 +11,14 @@ export function fetchLabs({ commit, dispatch, state }) {
       throw new Error("Could not fetch labs");
     });
 }
+
+export function fetchCurrentLabs({ commit, dispatch, state }) {
+  return apiService
+    .getCurrentLabResults()
+    .then(response => {
+      commit("SET_CURRENT_LABS", response.data);
+    })
+    .catch(error => {
+      throw new Error("Could not fetch labs");
+    });
+}

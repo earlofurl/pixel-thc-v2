@@ -95,6 +95,11 @@ name: "LabTable",
         sortable: true,
         alight: "center",
         sort: (a, b) => parseInt(a, 10) - parseInt(b, 10),
+      },
+      {
+        name: "current",
+        label: "Current",
+        field: "Current",
       }
     ]
   }

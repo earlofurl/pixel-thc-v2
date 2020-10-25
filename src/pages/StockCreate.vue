@@ -138,7 +138,7 @@
     // },
     computed: {
       labResultList() {
-        return this.$store.state.lab.labs
+        return this.$store.state.lab.currentLabs
       },
     }
   }

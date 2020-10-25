@@ -13,3 +13,7 @@ export function SET_LABS_TOTAL(state, labsTotal) {
 export function SET_LABS(state, labs) {
   state.labs = labs;
 }
+
+export function SET_CURRENT_LABS(state, labs) {
+  state.currentLabs = labs;
+}
