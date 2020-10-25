@@ -26,9 +26,6 @@
       content-class="bg-grey-1"
     >
       <q-list>
-        <q-item-label header class="text-grey-8">
-          Menu
-        </q-item-label>
         <!-- <div v-if="!this.isLoggedIn">
           <q-item clickable :to="{name: 'profile'}">
             <q-item-section avatar>
@@ -40,17 +37,54 @@
             </q-item-section>
           </q-item>
         </div> -->
-        <router-link to="/">Home</router-link>
-        <router-link v-if="$auth.isAuthenticated" to="/profile"
-          >Profile</router-link>
-        <router-link v-if="$auth.isAuthenticated" to="/lab"
-        >Lab</router-link>
-        <router-link v-if="$auth.isAuthenticated" to="/customers"
-        >Customers</router-link>
-        <router-link v-if="$auth.isAuthenticated" to="/stock"
-        >Stock</router-link>
-        <router-link v-if="$auth.isAuthenticated" to="/orders"
-        >Orders</router-link>
+        <q-item to="/" active-class="q-item-no-link-highlighting">
+          <q-item-section avatar>
+            <q-icon name="dashboard"/>
+          </q-item-section>
+          <q-item-section>
+            <q-item-label>Dashboard</q-item-label>
+          </q-item-section>
+        </q-item>
+        <q-item to="/profile" active-class="q-item-no-link-highlighting" v-if="$auth.isAuthenticated">
+          <q-item-section avatar>
+            <q-icon name="person"/>
+          </q-item-section>
+          <q-item-section>
+            <q-item-label>Profile</q-item-label>
+          </q-item-section>
+        </q-item>
+        <q-item to="/lab" active-class="q-item-no-link-highlighting" v-if="$auth.isAuthenticated">
+          <q-item-section avatar>
+            <q-icon name="emoji_objects"/>
+          </q-item-section>
+          <q-item-section>
+            <q-item-label>Lab</q-item-label>
+          </q-item-section>
+        </q-item>
+        <q-item to="/customers" active-class="q-item-no-link-highlighting" v-if="$auth.isAuthenticated">
+          <q-item-section avatar>
+            <q-icon name="people"/>
+          </q-item-section>
+          <q-item-section>
+            <q-item-label>Customers</q-item-label>
+          </q-item-section>
+        </q-item>
+        <q-item to="/stock" active-class="q-item-no-link-highlighting" v-if="$auth.isAuthenticated">
+          <q-item-section avatar>
+            <q-icon name="table_view"/>
+          </q-item-section>
+          <q-item-section>
+            <q-item-label>Stock</q-item-label>
+          </q-item-section>
+        </q-item>
+        <q-item to="/orders" active-class="q-item-no-link-highlighting" v-if="$auth.isAuthenticated">
+          <q-item-section avatar>
+            <q-icon name="list"/>
+          </q-item-section>
+          <q-item-section>
+            <q-item-label>Orders</q-item-label>
+          </q-item-section>
+        </q-item>
       </q-list>
     </q-drawer>
 

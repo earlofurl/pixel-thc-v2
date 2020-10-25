@@ -82,6 +82,7 @@
         itemTypes: [
           'Preroll - Single',
           'Preroll - TwoPack',
+          'Preroll Material - Bulk',
           'Hash - Pckgd',
           'Hash - Bulk',
           'Flower - Hand A',
