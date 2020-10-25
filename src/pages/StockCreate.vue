@@ -11,8 +11,14 @@
               outlined
               v-model="stock.labResult"
               label="Lab Results"
-              :options="labResultList"
+              :options="options"
               option-label="ProductName"
+              use-input
+              fill-input
+              @filter="filterFn"
+              emit-value
+              hide-selected
+              map-options
             ></q-select>
           </q-item-section>
         </q-item>
@@ -49,7 +55,7 @@
         <q-item>
           <q-item-section>
             <q-item-label class="q-pb-xs">UoM</q-item-label>
-            <q-select dense outlined v-model="stock.uom" label="UoM" :options="options" />
+            <q-select dense outlined v-model="stock.uom" label="UoM" :options="uomOptions" />
           </q-item-section>
         </q-item>
         <q-item>
@@ -83,10 +89,10 @@
           'Flower - Machine A/B Mix',
           'Kief - Loose Bulk'
         ],
-        options: [
+        uomOptions: [
           'GRAMS', 'POUNDS', 'EACH'
         ],
-
+        options: []
       };
     },
     methods: {
@@ -111,6 +117,20 @@
           priceDefault: "",
           labResult: {}
         };
+      },
+      filterFn(val, update) {
+        if (val === '') {
+          update(() => {
+            this.options = this.labResultList
+          })
+          return
+        }
+        update(() => {
+          const needle = val.toLowerCase()
+          this.options = this.labResultList.filter(
+            v => v.ProductName.toLowerCase().indexOf(needle) > -1
+          )
+        })
       }
     },
     // mounted() {
@@ -119,7 +139,7 @@
     computed: {
       labResultList() {
         return this.$store.state.lab.labs
-      }
+      },
     }
   }
 </script>
