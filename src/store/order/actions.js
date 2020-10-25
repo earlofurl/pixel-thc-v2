@@ -69,3 +69,10 @@ export function changeOrderStatus({ commit, state }, { id, status }) {
     commit("SET_ORDER", response.data);
   });
 }
+
+export function deleteOrder({ commit, state }, id) {
+  return apiService.deleteOrder(id).then(response => {
+    commit("DELETE_ORDER");
+    return response;
+  });
+}

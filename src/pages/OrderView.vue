@@ -19,12 +19,26 @@
       <div class="col-2">
         <OrderStatusCard />
       </div>
+      <div class="col-1"></div>
+      <div class="col-2">
+        <q-btn @click="onDeleteClick">DELETE</q-btn>
+      </div>
     </div>
     <div class="row">
       <div class="col">
         <SingleOrderTable />
       </div>
     </div>
+    <q-dialog v-model="card">
+      <div>
+        <q-card>
+          <q-form ref="deleteConfirmCard" @submit="deleteOrder">
+            <q-btn type="submit" label="Confirm Deletion"></q-btn>
+            <q-btn @click="onDeleteCancel" label="Cancel"></q-btn>
+          </q-form>
+        </q-card>
+      </div>
+    </q-dialog>
 <!--    <div>-->
 <!--      <q-fab-->
 <!--        v-model="fabRight"-->
@@ -46,12 +60,25 @@ export default {
   components: {OrderStatusCard, OrderTotalCard, SingleOrderTable, OrderCard },
   data() {
     return {
+      card: false,
       fabRight: true
     };
   },
   methods: {
     goBack() {
       return this.$router.push('/orders')
+    },
+    onDeleteClick() {
+      this.card = true;
+      this.$nextTick(()=>{ this.$refs.deleteConfirmCard.focus()})
+    },
+    onDeleteCancel() {
+      this.card = false;
+    },
+    deleteOrder() {
+      const id = this.$store.state.order.order.id;
+      this.$store.dispatch("order/deleteOrder", id);
+      this.$router.push('/orders');
     }
   }
   // created() {

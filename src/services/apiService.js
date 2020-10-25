@@ -102,5 +102,12 @@ export default {
     let statusChange = await apiClient.patch(`/orders/${id}/update`, status);
     console.log("statusChange " + statusChange);
     return statusChange;
+  },
+
+  async deleteOrder(id) {
+    await apiClient.delete(`orders/${id}`).then(response => {
+      console.log(response);
+      return response;
+    });
   }
 };

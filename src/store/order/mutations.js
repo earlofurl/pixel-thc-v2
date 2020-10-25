@@ -24,5 +24,10 @@ export function CREATE_FRESH_NEW_ORDER_OBJECT(state) {
 
 export function REMOVE_NEW_ITEM(state, newOrderItem) {
   const index = state.newOrder.indexOf(newOrderItem);
-  state.newOrder.splice(index, 1)
+  state.newOrder.splice(index, 1);
+}
+
+export function DELETE_ORDER(state, order) {
+  const index = state.orders.indexOf(order);
+  state.orders.splice(index, 1);
 }
