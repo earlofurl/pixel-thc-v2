@@ -36,6 +36,9 @@
       <template v-slot:body-cell-terpenePercent="props">
         <q-td :props="props">{{ getTerpenePercent(props.row.labTestId) }}</q-td>
       </template>
+      <template v-slot:body-cell-batch="props">
+        <q-td :props="props">{{ getBatch(props.row.labTestId) }}</q-td>
+      </template>
     </q-table>
     <q-dialog v-model="card">
       <div>
@@ -72,19 +75,19 @@
         selectedRow: {},
         pagination: {
           rowsPerPage: 20,
-          sortBy: "strain",
+          sortBy: "item-type",
           descending: false
         },
         columns: [
-          {
-            name: "id",
-            label: "Id",
-            field: "id",
-            required: true,
-            align: "left",
-            sortable: true,
-            sort: (a, b, rowA, rowB) => parseInt(a, 10) - parseInt(b, 10)
-          },
+          // {
+          //   name: "id",
+          //   label: "Id",
+          //   field: "id",
+          //   required: true,
+          //   align: "left",
+          //   sortable: true,
+          //   sort: (a, b, rowA, rowB) => parseInt(a, 10) - parseInt(b, 10)
+          // },
           {
             name: "strain",
             align: "center",
@@ -233,6 +236,11 @@
         const labResults = this.labResultList;
         const labResult = labResults.find(x => x.LabTestResultId === cid);
         return labResult.TerpenePercent
+      },
+      getBatch(cid) {
+        const labResults = this.labResultList;
+        const labResult = labResults.find(x => x.LabTestResultId === cid);
+        return labResult.TestBatch
       },
       // onRowClick(evt, row) {
       //   console.log(`Row ${row.id} clicked.`)
