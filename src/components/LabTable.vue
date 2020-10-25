@@ -37,12 +37,12 @@ import apiService from "src/services/apiService";
 
 export default {
 name: "LabTable",
-  props: {
-    labResults: {
-      type: Array,
-      required: true,
-    }
-  },
+  // props: {
+  //   labResults: {
+  //     type: Array,
+  //     // required: true,
+  //   }
+  // },
   data() {
   return {
     title: "Lab Results",
@@ -87,7 +87,7 @@ name: "LabTable",
       {name: "cbd_percent", label: "CBD%", field: "CbdPercent"},
       {name: "terp_percent", label: "Terp%", field: "TerpenePercent"},
       {name: "test_id", label: "Test ID", field: "LabTestExternalId"},
-      {name: "test_date", label: "Test Date", field: "TestPerformedDate", format: val => val.substring(0,10)},
+      {name: "test_date", label: "Test Date", field: "TestPerformedDate"},
       {
         name: "grow_name",
         label: "Grow Name",
@@ -99,15 +99,16 @@ name: "LabTable",
     ]
   }
   },
-  created() {
-  this.loading = true
-    apiService.getLabResults().then(response => {
-      this.labResults = response.data;
-      this.loading = false;
-    }).catch(error => {
-      console.log("There was an error: " + error.response);
-    })
+  async created() {
+    this.loading = true
+    await this.$store.dispatch('lab/fetchLabs').then(response => this.loading = false)
   },
+  computed: {
+    labResults() {
+      return this.$store.state.lab.labs;
+    }
+  }
+
 }
 </script>
 
