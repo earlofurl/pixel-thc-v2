@@ -122,7 +122,19 @@ export default {
       .patch(`line-items/${id}/update`, newQuantity)
       .then(response => {
         console.log(response);
-        return response;
       });
+  },
+
+  async changeLineItemPpu(id, ppu) {
+    console.log("ppu var at apiService level is:" + ppu);
+    let newPpu = {};
+    newPpu.ppu = ppu;
+    await apiClient.patch(`line-items/${id}/update`, newPpu).then(response => {
+      console.log(response);
+    });
+  },
+
+  deleteLineItem(id) {
+    return apiClient.delete(`line-items/${id}`);
   }
 };

@@ -9,3 +9,8 @@ export function SET_LINEITEMS(state, lineItems) {
 export function SET_LINEITEM(state, lineItem) {
   state.lineItem = lineItem;
 }
+
+export function DELETE_LINEITEM(state, lineItem) {
+  const index = state.lineItems.indexOf(lineItem);
+  state.lineItems.splice(index, 1);
+}

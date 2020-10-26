@@ -26,7 +26,7 @@
               </q-td>
               <q-td key="ppu" :props="props">
                 {{ props.row.ppu }}
-                <q-popup-edit v-model="props.row.ppu" buttons persistent>
+                <q-popup-edit v-model="props.row.ppu" buttons persistent @save="updatePpu(props.row.id, props.row.ppu)">
                   <q-input v-model="props.row.ppu" dense autofocus counter></q-input>
                 </q-popup-edit>
               </q-td>
@@ -35,6 +35,9 @@
               </q-td>
               <q-td key="packStatus" :props="props">
                 <q-checkbox v-model="props.row.packedStatus" v-on:click.native="changeLineItemStatus(props.row.id, props.row.packedStatus)"></q-checkbox>
+              </q-td>
+              <q-td key="edit" :props="props">
+                <q-btn icon="delete" @click="deleteLineItem(props.row.id)"></q-btn>
               </q-td>
             </q-tr>
           </template>
@@ -117,6 +120,11 @@ export default {
           //   return val.packedStatus==true ? "fas fa-check-square" : "fas fa-times-circle"
           // },
           sortable: true
+        },
+        {
+          name: "edit",
+          align: "right",
+          label: "Edit"
         }
       ]
     };
@@ -171,6 +179,14 @@ export default {
     updateQuantity(id, quantity) {
       console.log('Update quantity has been triggered.')
       this.$store.dispatch("lineItem/changeLineItemQuantity", { id, quantity })
+    },
+    updatePpu(id, ppu) {
+      console.log('Update PPU has been triggered');
+      this.$store.dispatch("lineItem/changeLineItemPpu", { id, ppu} );
+    },
+    deleteLineItem(id) {
+      console.log(`Delete Line Item has been triggered on Item id #${id}`);
+      this.$store.dispatch("lineItem/deleteLineItem", id);
     },
     // async changeLineItemStatus(id, status) { // pass id and status params from row props on click of checkbox
     //   console.log(id, status);

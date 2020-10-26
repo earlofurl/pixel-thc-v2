@@ -113,6 +113,7 @@
 
       onRowClick(evt, row) {
         const rowSelect = row;
+        console.log(rowSelect);
         // this.clickedRow = row;
         // console.log(this.selectedRow.quantity);
         // this.adjustQuantity = this.selectedRow.quantity

@@ -17,8 +17,9 @@ export function SET_STOCKS(state, stocks) {
 // BUG: Successfully adding to state, but not always the correct item.
 export function ADJUST_STOCK_QUANTITY(state, row) {
   console.log(row);
-  const stockItem = state.stocks.find(x => x.id === row.stock);
-  stockItem.quantity = parseInt(stockItem.quantity) + parseInt(row.quantity);
+  const stockItem = state.stocks.find(x => x.id === row.stockId);
+  stockItem.quantity =
+    parseFloat(stockItem.quantity) + parseFloat(row.quantity);
   // store.dispatch("stock/fetchStockById", row.stock)
   // console.log(stockItem)
   // console.log(adjustQuantity)
