@@ -112,5 +112,17 @@ export default {
       console.log(response);
       return response;
     });
+  },
+
+  async changeLineItemQuantity(id, quantity) {
+    console.log("quantity var at apiService level is:" + quantity);
+    let newQuantity = {};
+    newQuantity.quantity = quantity;
+    await apiClient
+      .patch(`line-items/${id}/update`, newQuantity)
+      .then(response => {
+        console.log(response);
+        return response;
+      });
   }
 };

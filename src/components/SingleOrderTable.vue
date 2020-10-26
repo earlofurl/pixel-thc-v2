@@ -10,10 +10,34 @@
       :pagination.sync="pagination"
       :loading="loading"
     >
-          <template v-slot:body-cell-packStatus="props">
-            <q-checkbox v-model="props.row.packedStatus" v-on:click.native="changeLineItemStatus(props.row.id, props.row.packedStatus)"></q-checkbox>
+          <template v-slot:body="props">
+            <q-tr :props="props">
+              <q-td key="strain" :props="props">
+                {{ props.row.strain }}
+              </q-td>
+              <q-td key="itemType" :props="props">
+                {{ props.row.itemType }}
+              </q-td>
+              <q-td key="quantity" :props="props">
+                {{ props.row.quantity }}
+                <q-popup-edit v-model="props.row.quantity" buttons persistent @save="updateQuantity(props.row.id, props.row.quantity)">
+                  <q-input v-model="props.row.quantity" dense autofocus counter buttons></q-input>
+                </q-popup-edit>
+              </q-td>
+              <q-td key="ppu" :props="props">
+                {{ props.row.ppu }}
+                <q-popup-edit v-model="props.row.ppu" buttons persistent>
+                  <q-input v-model="props.row.ppu" dense autofocus counter></q-input>
+                </q-popup-edit>
+              </q-td>
+              <q-td key="Total" :props="props">
+                {{ props.row.quantity * props.row.ppu}}
+              </q-td>
+              <q-td key="packStatus" :props="props">
+                <q-checkbox v-model="props.row.packedStatus" v-on:click.native="changeLineItemStatus(props.row.id, props.row.packedStatus)"></q-checkbox>
+              </q-td>
+            </q-tr>
           </template>
-
     </q-table>
   </div>
 </template>
@@ -143,6 +167,10 @@ export default {
               // TODO: add condition where instead of changing to 'OPEN' if already open, just do nothing, else change back to 'OPEN' in case status was previously 'PACKED'
               allPacked === true ? this.changeOrderStatus('PACKED') : this.changeOrderStatus('OPEN')
             })
+    },
+    updateQuantity(id, quantity) {
+      console.log('Update quantity has been triggered.')
+      this.$store.dispatch("lineItem/changeLineItemQuantity", { id, quantity })
     },
     // async changeLineItemStatus(id, status) { // pass id and status params from row props on click of checkbox
     //   console.log(id, status);

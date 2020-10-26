@@ -58,3 +58,13 @@ export async function changeLineItemStatus(
     return response.data;
   });
 }
+
+export function changeLineItemQuantity(
+  { commit, getters, state },
+  { id, quantity }
+) {
+  return apiService.changeLineItemQuantity(id, quantity).then(response => {
+    commit("SET_LINEITEM", response.data);
+    return response.data;
+  });
+}
