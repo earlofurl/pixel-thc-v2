@@ -15,6 +15,7 @@
   "dependencies": {
     "@auth0/auth0-spa-js": "^1.11.0",
     "@aws-amplify/ui-vue": "^0.2.14",
+    "@quasar/cli": "^1.1.2",
     "@quasar/extras": "1.9.9",
     "aws-amplify": "^3.0.24",
     "aws-amplify-vue": "^2.1.2",
