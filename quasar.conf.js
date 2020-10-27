@@ -43,7 +43,7 @@ module.exports = function(ctx) {
       env: {
         API: ctx.dev
           ? "http://localhost:3000"
-          : "https://pixel-thc-backend-v-2-mmuqj.ondigitalocean.app"
+          : "https://pixel-thc-backend-v-2-mmuqj.ondigitalocean.app/api"
       },
 
       // transpile: false,
