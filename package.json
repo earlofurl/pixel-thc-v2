@@ -8,9 +8,9 @@
   "scripts": {
     "lint": "eslint --ext .js,.vue ./",
     "test": "echo \"No test specified\" && exit 0",
-    "build": "quasar build",
+    "build": "npm i -g @quasar/cli && quasar build",
     "start": "node server.js",
-    "heroku-postbuild": "yarn && yarn build && npm i -g @quasar/cli"
+    "heroku-postbuild": "yarn && yarn build"
   },
   "dependencies": {
     "@auth0/auth0-spa-js": "^1.11.0",
