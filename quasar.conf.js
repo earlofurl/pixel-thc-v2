@@ -41,7 +41,8 @@ module.exports = function(ctx) {
     build: {
       vueRouterMode: "history", // available values: 'hash', 'history'
       env: {
-        API: ctx.dev ? "http://localhost:3000" : "https://api.pixelthc.com"
+        API: "http://localhost:3000"
+        // API: ctx.dev ? "http://localhost:3000" : "https://api.pixelthc.com"
       },
 
       // transpile: false,
