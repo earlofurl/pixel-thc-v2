@@ -76,3 +76,11 @@ export function deleteOrder({ commit, state }, id) {
     return response;
   });
 }
+
+export function deleteLineItem({ commit, getters, state }, id) {
+  return apiService.deleteLineItem(id).then(response => {
+    console.log(response);
+    commit("DELETE_LINEITEM", response.data);
+    return response.data;
+  });
+}

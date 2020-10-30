@@ -186,7 +186,7 @@ export default {
     },
     deleteLineItem(id) {
       console.log(`Delete Line Item has been triggered on Item id #${id}`);
-      this.$store.dispatch("lineItem/deleteLineItem", id);
+      this.$store.dispatch("order/deleteLineItem", id);
     },
     // async changeLineItemStatus(id, status) { // pass id and status params from row props on click of checkbox
     //   console.log(id, status);

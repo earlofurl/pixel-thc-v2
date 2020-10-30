@@ -10,7 +10,15 @@ export function SET_LINEITEM(state, lineItem) {
   state.lineItem = lineItem;
 }
 
-export function DELETE_LINEITEM(state, lineItem) {
-  const index = state.lineItems.indexOf(lineItem);
-  state.lineItems.splice(index, 1);
-}
+// export function DELETE_LINEITEM(state, lineItem) {
+//   console.log(state);
+//   console.log(lineItem.id);
+//   // const index = state.lineItems.indexOf(lineItem);
+//   // console.log(index);
+//   console.log(state.order.lineItems);
+//   const index = state.order.lineItems.findIndex(
+//     item => item.id === lineItem.id
+//   );
+//   console.log(index);
+//   return state.order.lineItems.splice(index, 1);
+// }
