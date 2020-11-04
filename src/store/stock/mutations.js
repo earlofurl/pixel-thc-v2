@@ -14,10 +14,11 @@ export function SET_STOCKS(state, stocks) {
   state.stocks = stocks;
 }
 
-// BUG: Successfully adding to state, but not always the correct item.
+// BUG: Successfully adding to state, and fixed NaN conversion error, but not always adjusting the correct item.
+// Seems to stick to the first item adjusted and then add every subsequent quantity to that first item.
 export function ADJUST_STOCK_QUANTITY(state, row) {
   console.log(row);
-  const stockItem = state.stocks.find(x => x.id === row.stockId);
+  let stockItem = state.stocks.find(x => x.id === row.stockId);
   stockItem.quantity =
     parseFloat(stockItem.quantity) + parseFloat(row.quantity);
   // store.dispatch("stock/fetchStockById", row.stock)
