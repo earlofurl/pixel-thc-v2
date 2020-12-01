@@ -22,9 +22,8 @@
       <template v-slot:body-cell-current="props">
         <q-td :props="props">
           <q-checkbox
-            v-model="props.row.current"
+            v-model="props.row.Current"
             disable
-            style="transform: scale(0.8);"
           />
         </q-td>
       </template>
