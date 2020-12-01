@@ -57,16 +57,16 @@
           <q-input filled v-model="order.scheduledPackDate" placeholder="<-- Pack Date & Time -->">
             <template v-slot:prepend>
               <q-icon name="event" class="cursor-pointer">
-                <q-popup-proxy transition-show="scale" transition-hide="scale">
-                  <q-date v-model="order.scheduledPackDate" mask="YYYY-MM-DD HH:mm"></q-date>
+                <q-popup-proxy ref="packDateProxy" transition-show="scale" transition-hide="scale">
+                  <q-date v-model="order.scheduledPackDate" mask="YYYY-MM-DD HH:mm" @input="() => $refs.packDateProxy.hide()"></q-date>
                 </q-popup-proxy>
               </q-icon>
             </template>
 
             <template v-slot:append>
               <q-icon name="access_time" class="cursor-pointer">
-                <q-popup-proxy transition-show="scale" transition-hide="scale">
-                  <q-time v-model="order.scheduledPackDate" mask="YYYY-MM-DD HH:mm"></q-time>
+                <q-popup-proxy ref="packTimeProxy" transition-show="scale" transition-hide="scale">
+                  <q-time v-model="order.scheduledPackDate" mask="YYYY-MM-DD HH:mm" @input="() => $refs.packTimeProxy.hide()"></q-time>
                 </q-popup-proxy>
               </q-icon>
             </template>
@@ -76,16 +76,16 @@
           <q-input filled v-model="order.scheduledShipDate" placeholder="<-- Ship Date & Time -->">
             <template v-slot:prepend>
               <q-icon name="event" class="cursor-pointer">
-                <q-popup-proxy transition-show="scale" transition-hide="scale">
-                  <q-date v-model="order.scheduledShipDate" mask="YYYY-MM-DD HH:mm"></q-date>
+                <q-popup-proxy ref="shipDateProxy" transition-show="scale" transition-hide="scale">
+                  <q-date v-model="order.scheduledShipDate" mask="YYYY-MM-DD HH:mm" @input="() => $refs.shipDateProxy.hide()"></q-date>
                 </q-popup-proxy>
               </q-icon>
             </template>
 
             <template v-slot:append>
               <q-icon name="access_time" class="cursor-pointer">
-                <q-popup-proxy transition-show="scale" transition-hide="scale">
-                  <q-time v-model="order.scheduledShipDate" mask="YYYY-MM-DD HH:mm"></q-time>
+                <q-popup-proxy ref="shipTimeProxy" transition-show="scale" transition-hide="scale">
+                  <q-time v-model="order.scheduledShipDate" mask="YYYY-MM-DD HH:mm" @input="() => $refs.shipTimeProxy.hide()"></q-time>
                 </q-popup-proxy>
               </q-icon>
             </template>

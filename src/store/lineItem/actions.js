@@ -76,9 +76,10 @@ export function changeLineItemPpu({ commit, getters, state }, { id, ppu }) {
   });
 }
 
-export function deleteLineItem({ commit, getters, state }, id) {
-  return apiService.deleteLineItem(id).then(response => {
-    commit("DELETE_LINEITEM", response.data);
-    return response.data;
-  });
-}
+// export function deleteLineItem({ commit, getters, state }, id) {
+//   return apiService.deleteLineItem(id).then(response => {
+//     console.log(response);
+//     commit("DELETE_LINEITEM", response.data);
+//     return response.data;
+//   });
+// }
