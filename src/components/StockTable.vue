@@ -64,7 +64,7 @@ export default {
       loading: false,
       pagination: {
         rowsPerPage: 20,
-        sortBy: "item-type",
+        sortBy: "strain",
         descending: false
       },
       columns: [

@@ -11,6 +11,7 @@
       :loading="loading"
       :filter="filter"
     >
+
       <template v-slot:top-right>
         <q-input standout dense debounce="300" color="primary" v-model="filter" placeholder="search">
           <template v-slot:append>
@@ -18,6 +19,8 @@
             <q-icon name="search" />
           </template>
         </q-input>
+<!--        Below line adds button to top-right enabling user to show only the current lab results in the table.-->
+        <q-btn name="currentFilter" color="primary" :disable="loading" @click="filterCurrent">{{ filterText }}</q-btn>
       </template>
       <template v-slot:body-cell-current="props">
         <q-td :props="props">
@@ -52,6 +55,7 @@ name: "LabTable",
       descending: false,
     },
     filter: "",
+    filterToggle: false,
     columns: [
       {
         name: "Source Tag",
@@ -109,7 +113,25 @@ name: "LabTable",
   },
   computed: {
     labResults() {
-      return this.$store.state.lab.labs;
+      if (this.filterToggle) {
+        return this.$store.state.lab.labs.filter((el) => {
+          return el.Current === true
+        })
+      } else {
+        return this.$store.state.lab.labs;
+      }
+    },
+    filterText() {
+      if (this.filterToggle) {
+        return 'Show All'
+      } else {
+        return 'Current Only'
+      }
+    }
+  },
+  methods: {
+    filterCurrent() {
+      this.filterToggle = !this.filterToggle
     }
   }
 

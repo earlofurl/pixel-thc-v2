@@ -41,16 +41,61 @@
       </template>
     </q-table>
     <q-dialog v-model="card">
-      <div>
+      <div class="q-gutter-y-md" style="max-width: 600px">
         <q-card>
-          <q-form ref="inputCard" @submit="submitCard(selectedRow, quantityInputText, priceInputText)">
-            <q-input v-model="quantityInputText" label="Quantity"></q-input>
-            <q-input v-model="priceInputText" label="$/Unit"></q-input>
-            <q-btn type="submit" label="Add to Order" :disabled="overStockLimit"></q-btn>
-            <q-badge color="red" v-if="overStockLimit">
-              Over Stock Limit<q-icon name="warning" color="white" class="q-ml-xs"></q-icon>
-            </q-badge>
-          </q-form>
+          <q-card-section horizontal>
+
+            <q-card-section>
+              <p>Effect on original item will be displayed here.</p>
+              <p>{{ selectedRow.strain }}</p>
+              <p>{{ selectedRow.itemType }}</p>
+              <p>{{ selectedRow.quantity - stockChangeDisplay }}</p>
+              <p>{{ selectedRow.uom }}</p>
+            </q-card-section>
+
+            <q-separator vertical></q-separator>
+
+            <q-card-section>
+          <q-tabs v-model="tab"
+                  dense
+                  class="text-grey"
+                  active-color="primary"
+                  indicator-color="primary"
+                  align="justify"
+                  narrow-indicator>
+            <q-tab name="simple" label="Simple"></q-tab>
+            <q-tab name="newItem" label="Create New"></q-tab>
+          </q-tabs>
+
+          <q-separator></q-separator>
+
+          <q-tab-panels v-model="tab" animated>
+            <q-tab-panel name="simple">
+              <q-form ref="inputCard" @submit="submitCard(selectedRow, quantityInputText, priceInputText)">
+                <q-input v-model="quantityInputText" label="Quantity"></q-input>
+                <q-input v-model="priceInputText" label="$/Unit"></q-input>
+                <q-btn type="submit" label="Add to Order" :disabled="overStockLimit"></q-btn>
+                <q-badge color="red" v-if="overStockLimit">
+                  Over Stock Limit<q-icon name="warning" color="white" class="q-ml-xs"></q-icon>
+                </q-badge>
+              </q-form>
+            </q-tab-panel>
+            <q-tab-panel name="newItem">
+              <q-form ref="inputCardNewItem" @submit="submitCardNewItem(selectedRow, newItemType, newItemUoM, quantityInputText, priceInputText)">
+                <q-select v-model="newItemType" :options="itemTypes" label="New Item Type"></q-select>
+                <q-input v-model="quantityInputText" label="New Item Quantity"></q-input>
+                <q-select v-model="newItemUoM" :options="uomOptions" label="New Item UoM"></q-select>
+                <q-input v-model="priceInputText" label="New Item $/Unit"></q-input>
+                <q-btn type="submit" label="Add to Order" :disabled="overStockLimit"></q-btn>
+<!--                Overstock limit calculation will need to be adjusted based on new item type being chosen-->
+                <q-badge color="red" v-if="overStockLimit">
+                  Over Stock Limit<q-icon name="warning" color="white" class="q-ml-xs"></q-icon>
+                </q-badge>
+              </q-form>
+            </q-tab-panel>
+          </q-tab-panels>
+            </q-card-section>
+          </q-card-section>
         </q-card>
       </div>
     </q-dialog>
@@ -78,6 +123,24 @@
           sortBy: "item-type",
           descending: false
         },
+        tab: 'simple',
+        itemTypes: [
+          'Preroll - Single',
+          'Preroll - TwoPack',
+          'Preroll Material - Bulk',
+          'Hash - Pckgd',
+          'Hash - Bulk',
+          'Flower - Hand A',
+          'Flower - Machine B',
+          'Flower - Machine A/B Mix',
+          'Kief - Loose Bulk'
+        ],
+        uomOptions: [
+          'GRAMS', 'POUNDS', 'EACH'
+        ],
+        options: [],
+        newItemType: "",
+        newItemUoM: "",
         columns: [
           // {
           //   name: "id",
@@ -204,6 +267,11 @@
       },
       overStockLimit() {
         return this.availableQuantity < 0;
+      },
+      stockChangeDisplay() {
+        if (this.newItemType === 'Preroll - Single') {
+          return (this.quantityInputText / 2)
+        } else return this.quantityInputText
       }
     },
     methods: {
@@ -220,6 +288,15 @@
         const newRow = this.mutateStockIntoLineItem(row, quantity, ppu)
         this.$store.dispatch("order/addToNewOrder", newRow)
         this.adjustOriginalInventory(row, quantity)
+        this.card = false
+      },
+      submitCardNewItem(row, newItemType, newUoM, quantity, ppu) {
+        const newRow = this.mutateStockIntoNewLineItem(row, newItemType, newUoM, quantity, ppu)
+        this.$store.dispatch("order/addToNewOrder", newRow)
+        if (newItemType === 'Preroll - Single') {
+          const halfQuantity = (quantity / 2)
+          this.adjustOriginalInventory(row, halfQuantity)
+        } else this.adjustOriginalInventory(row, quantity)
         this.card = false
       },
       getThcPercent(cid) {
@@ -262,6 +339,22 @@
         newItem.quantity = quantity
         newItem.ppu = ppu
         return newItem
+      },
+      mutateStockIntoNewLineItem(stockItem, newItemType, newUoM, quantity, ppu) {
+        const original = stockItem
+        let mutatedItem = {}
+        mutatedItem.strain = original.strain
+        mutatedItem.itemType = newItemType
+        // Do I need to change the line below? Need to look whether stockId
+        // Is just being used as a marker of parent package
+        // Vs the newly created item becoming its own Stock lineItem
+        mutatedItem.stockId = original.id
+        mutatedItem.orderId = 1
+        mutatedItem.notes = original.notes
+        mutatedItem.quantity = quantity
+        mutatedItem.uom = newUoM
+        mutatedItem.ppu = ppu
+        return mutatedItem
       },
       adjustOriginalInventory(row, adjustQuantity) {
         let newRow = row
