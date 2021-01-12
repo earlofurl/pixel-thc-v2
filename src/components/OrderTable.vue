@@ -69,7 +69,7 @@ export default {
           align: "center",
           field: "scheduledPackDate",
           sortable: true,
-          format: (val, row) => date.formatDate(val, "dddd, DD-MM-YYYY")
+          format: (val, row) => date.formatDate(val, "dddd, DD, MMM")
         },
         {
           name: "shipDate",
@@ -77,7 +77,7 @@ export default {
           align: "center",
           field: "scheduledShipDate",
           sortable: true,
-          format: (val, row) => date.formatDate(val, "dddd, DD-MM-YYYY")
+          format: (val, row) => date.formatDate(val, "dddd, DD, MMM")
         },
         {
           name: "notes",

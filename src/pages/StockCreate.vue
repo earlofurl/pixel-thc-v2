@@ -1,11 +1,14 @@
 <template>
-  <div class="q-pa-md" style="max-width: 500px">
-    <h1>Add New Stock Item</h1>
+  <q-page class="q-pa-md" style="max-width: 690px">
+    <div class="row q-col-gutter-lg">
+    <div class="col-auto">
+    <q-card class="q-gutter-lg-md">
+    <h3>Add New Stock Item</h3>
     <q-form class="q-gutter-md" @submit="createStock">
       <q-list>
         <q-item>
           <q-item-section>
-            <q-item-label class="q-pb-xs">Lab Results</q-item-label>
+<!--            <q-item-label class="q-pb-xs">Lab Results</q-item-label>-->
             <q-select
               dense
               outlined
@@ -24,13 +27,13 @@
         </q-item>
         <q-item>
           <q-item-section>
-            <q-item-label class="q-pb-xs">Item Strain</q-item-label>
+<!--            <q-item-label class="q-pb-xs">Item Strain</q-item-label>-->
             <q-input dense outlined disable v-model="stock.labResult.ProductName" label="Strain Name" />
           </q-item-section>
         </q-item>
         <q-item>
           <q-item-section>
-            <q-item-label class="q-pb-xs">Batch</q-item-label>
+<!--            <q-item-label class="q-pb-xs">Batch</q-item-label>-->
             <q-input dense outlined disable v-model="stock.labResult.TestBatch" label="Batch" />
           </q-item-section>
         </q-item>
@@ -42,32 +45,43 @@
 <!--        </q-item>-->
         <q-item>
           <q-item-section>
-            <q-item-label class="q-pb-xs">Item Type</q-item-label>
+<!--            <q-item-label class="q-pb-xs">Item Type</q-item-label>-->
             <q-select dense outlined v-model="stock.itemType" label="Item Type" :options="itemTypes" />
           </q-item-section>
         </q-item>
         <q-item>
           <q-item-section>
-            <q-item-label class="q-pb-xs">Quantity</q-item-label>
+<!--            <q-item-label class="q-pb-xs">Quantity</q-item-label>-->
             <q-input dense outlined v-model="stock.quantity" label="Quantity" />
           </q-item-section>
         </q-item>
         <q-item>
           <q-item-section>
-            <q-item-label class="q-pb-xs">UoM</q-item-label>
+<!--            <q-item-label class="q-pb-xs">UoM</q-item-label>-->
             <q-select dense outlined v-model="stock.uom" label="UoM" :options="uomOptions" />
           </q-item-section>
         </q-item>
         <q-item>
           <q-item-section>
-            <q-item-label class="q-pb-xs">Default Price</q-item-label>
+<!--            <q-item-label class="q-pb-xs">Default Price</q-item-label>-->
             <q-input dense outlined v-model="stock.priceDefault" label="Default Price" />
           </q-item-section>
         </q-item>
       </q-list>
       <q-btn type="submit" class="q-mr-xs" label="Submit" />
     </q-form>
-  </div>
+    </q-card>
+    </div>
+    <div class="col-auto">
+      <q-card class="q-gutter-lg-md">
+        <h3>Details</h3>
+        <p>THC %: {{ stock.labResult.ThcPercent }}</p>
+        <p>CBD %: {{ stock.labResult.CbdPercent }}</p>
+        <p>Terp %: {{ stock.labResult.TerpenePercent }}</p>
+      </q-card>
+    </div>
+    </div>
+  </q-page>
 </template>
 
 <script>
