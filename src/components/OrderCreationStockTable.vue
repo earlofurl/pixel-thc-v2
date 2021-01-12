@@ -41,16 +41,44 @@
       </template>
     </q-table>
     <q-dialog v-model="card">
-      <div>
+      <div class="q-gutter-y-md" style="max-width: 600px">
         <q-card>
-          <q-form ref="inputCard" @submit="submitCard(selectedRow, quantityInputText, priceInputText)">
-            <q-input v-model="quantityInputText" label="Quantity"></q-input>
-            <q-input v-model="priceInputText" label="$/Unit"></q-input>
-            <q-btn type="submit" label="Add to Order" :disabled="overStockLimit"></q-btn>
-            <q-badge color="red" v-if="overStockLimit">
-              Over Stock Limit<q-icon name="warning" color="white" class="q-ml-xs"></q-icon>
-            </q-badge>
-          </q-form>
+          <q-tabs v-model="tab"
+                  dense
+                  class="text-grey"
+                  active-color="primary"
+                  indicator-color="primary"
+                  align="justify"
+                  narrow-indicator>
+            <q-tab name="simple" label="Simple"></q-tab>
+            <q-tab name="newItem" label="Create New"></q-tab>
+          </q-tabs>
+
+          <q-separator></q-separator>
+
+          <q-tab-panels v-model="tab" animated>
+            <q-tab-panel name="simple">
+              <q-form ref="inputCard" @submit="submitCard(selectedRow, quantityInputText, priceInputText)">
+                <q-input v-model="quantityInputText" label="Quantity"></q-input>
+                <q-input v-model="priceInputText" label="$/Unit"></q-input>
+                <q-btn type="submit" label="Add to Order" :disabled="overStockLimit"></q-btn>
+                <q-badge color="red" v-if="overStockLimit">
+                  Over Stock Limit<q-icon name="warning" color="white" class="q-ml-xs"></q-icon>
+                </q-badge>
+              </q-form>
+            </q-tab-panel>
+            <q-tab-panel name="newItem">
+              <q-form ref="inputCardNewItem" @submit="submitCard(selectedRow, quantityInputText, priceInputText)">
+                <q-select v-model="newItemType" :options="itemTypes" label="New Item Type"></q-select>
+                <q-input v-model="quantityInputText" label="New Item Quantity"></q-input>
+                <q-input v-model="priceInputText" label=" New Item $/Unit"></q-input>
+                <q-btn type="submit" label="Add to Order" :disabled="overStockLimit"></q-btn>
+                <q-badge color="red" v-if="overStockLimit">
+                  Over Stock Limit<q-icon name="warning" color="white" class="q-ml-xs"></q-icon>
+                </q-badge>
+              </q-form>
+            </q-tab-panel>
+          </q-tab-panels>
         </q-card>
       </div>
     </q-dialog>
@@ -78,6 +106,23 @@
           sortBy: "item-type",
           descending: false
         },
+        tab: 'simple',
+        itemTypes: [
+          'Preroll - Single',
+          'Preroll - TwoPack',
+          'Preroll Material - Bulk',
+          'Hash - Pckgd',
+          'Hash - Bulk',
+          'Flower - Hand A',
+          'Flower - Machine B',
+          'Flower - Machine A/B Mix',
+          'Kief - Loose Bulk'
+        ],
+        uomOptions: [
+          'GRAMS', 'POUNDS', 'EACH'
+        ],
+        options: [],
+        newItemType: "",
         columns: [
           // {
           //   name: "id",
