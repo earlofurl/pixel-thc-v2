@@ -1,12 +1,16 @@
 <template>
-  <div class="q-pa-sm">
+  <q-page class="q-pa-lg">
     <div class="row">
       <div class="col">
       <CustomerCard />
       </div>
-      <div class="col">
-        <FacilityDetailCard />
-      </div>
+<!--      <div class="col">-->
+<!--        <FacilityDetailCard />-->
+<!--      </div>-->
+    </div>
+    <q-separator></q-separator>
+    <div class="row">
+      <CustomerViewFacilityTable />
     </div>
         <q-card>
         <h4>Add Facility</h4>
@@ -100,17 +104,18 @@
           </q-card-section>
         </q-form>
         </q-card>
-  </div>
+  </q-page>
 </template>
 
 <script>
 import CustomerCard from "../components/CustomerCard";
 import FacilityDetailCard from "components/FacilityDetailCard";
 import store from "../store";
+import CustomerViewFacilityTable from "components/CustomerViewFacilityTable";
 
 export default {
   name: "CustomerView",
-  components: {FacilityDetailCard, CustomerCard },
+  components: {CustomerViewFacilityTable, CustomerCard },
   data() {
     return {
       facility: this.createFreshFacilityObject()
