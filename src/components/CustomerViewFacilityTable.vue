@@ -32,6 +32,12 @@ export default {
           sortable: true
         },
         {
+          name: "license",
+          align: "center",
+          label: "License",
+          field: "license",
+        },
+        {
           name: "address1",
           align: "center",
           label: "Address",

@@ -15,7 +15,26 @@
           Pixel THC
         </q-toolbar-title>
 
-        <div>PixelTHC v0.8.22</div>
+        <div v-if="!$auth.loading">
+          <div class="row">
+            <div class="col-4"></div>
+            <div class="col-auto">
+              <!-- show login when not authenticated -->
+              <q-btn
+                v-if="!$auth.isAuthenticated"
+                @click="login"
+                color="primary"
+              >
+                Log in
+              </q-btn>
+              <!-- show logout when authenticated -->
+              <q-btn v-if="$auth.isAuthenticated" @click="logout">
+                Log out
+              </q-btn>
+            </div>
+            <div class="col-auto"></div>
+          </div>
+        </div>
       </q-toolbar>
     </q-header>
 
@@ -150,6 +169,18 @@ export default {
       leftDrawerOpen: false,
       essentialLinks: linksData
     };
+  },
+  methods: {
+    // Log the user in
+    login() {
+      this.$auth.loginWithRedirect();
+    },
+    // Log the user out
+    logout() {
+      this.$auth.logout({
+        returnTo: window.location.origin
+      });
+    }
   }
 };
 </script>
