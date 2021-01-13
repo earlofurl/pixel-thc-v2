@@ -1,7 +1,7 @@
 <template>
   <div class="row">
     <q-card>
-      <q-list>
+      <q-list dense>
         <q-item>
           <q-item-section>
             Name:

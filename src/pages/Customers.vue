@@ -14,6 +14,7 @@ export default {
   components: { CustomersTable },
   created() {
     this.$store.dispatch("customer/fetchCustomers");
+    this.$store.dispatch("facility/fetchFacilities");
   }
 };
 </script>
