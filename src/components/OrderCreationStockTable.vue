@@ -128,10 +128,11 @@
           'Preroll - Single',
           'Preroll - TwoPack',
           'Preroll Material - Bulk',
+          'Preroll - Loose Rolled',
           'Hash - Pckgd',
           'Hash - Bulk',
           'Flower - Hand A',
-          'Flower - Machine B',
+          'Flower - Cleaned B',
           'Flower - Machine A/B Mix',
           'Kief - Loose Bulk'
         ],

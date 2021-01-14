@@ -97,12 +97,13 @@
           'Preroll - Single',
           'Preroll - TwoPack',
           'Preroll Material - Bulk',
+          'Preroll - Loose Rolled',
           'Hash - Pckgd',
           'Hash - Bulk',
           'Flower - Hand A',
           'Flower - Machine B',
           'Flower - Machine A/B Mix',
-          'Kief - Loose Bulk'
+          'Kief - Loose Bulk',
         ],
         uomOptions: [
           'GRAMS', 'POUNDS', 'EACH'
