@@ -1,7 +1,10 @@
 <template>
   <q-layout view="lHh Lpr lFf">
     <q-header elevated>
-      <q-toolbar>
+      <q-toolbar
+        class="Qtoolbar"
+        elevated
+      >
         <q-btn
           flat
           dense
@@ -9,9 +12,10 @@
           icon="menu"
           aria-label="Menu"
           @click="leftDrawerOpen = !leftDrawerOpen"
+          color="primary"
         />
 
-        <q-toolbar-title>
+        <q-toolbar-title class="toolbarText">
           Pixel THC
         </q-toolbar-title>
 
@@ -28,7 +32,7 @@
                 Log in
               </q-btn>
               <!-- show logout when authenticated -->
-              <q-btn v-if="$auth.isAuthenticated" @click="logout">
+              <q-btn v-if="$auth.isAuthenticated" @click="logout" color="secondary">
                 Log out
               </q-btn>
             </div>
@@ -42,7 +46,8 @@
       v-model="leftDrawerOpen"
       show-if-above
       bordered
-      content-class="bg-grey-1"
+      content-class="bg-purple-10"
+      width="200"
     >
       <q-list>
         <!-- <div v-if="!this.isLoggedIn">
@@ -58,52 +63,58 @@
         </div> -->
         <q-item to="/" active-class="q-item-no-link-highlighting">
           <q-item-section avatar>
-            <q-icon name="dashboard"/>
+            <q-icon class="drawerIcon" name="dashboard"/>
           </q-item-section>
           <q-item-section>
-            <q-item-label>Dashboard</q-item-label>
+            <q-item-label class="drawerLabel">Dashboard</q-item-label>
           </q-item-section>
         </q-item>
+
         <q-item to="/profile" active-class="q-item-no-link-highlighting" v-if="$auth.isAuthenticated">
           <q-item-section avatar>
-            <q-icon name="person"/>
+            <q-icon class="drawerIcon" name="person"/>
           </q-item-section>
           <q-item-section>
-            <q-item-label>Profile</q-item-label>
+            <q-item-label class="drawerLabel">Profile</q-item-label>
           </q-item-section>
         </q-item>
+
         <q-item to="/lab" active-class="q-item-no-link-highlighting" v-if="$auth.isAuthenticated">
           <q-item-section avatar>
-            <q-icon name="emoji_objects"/>
+            <q-icon class="drawerIcon" name="emoji_objects"/>
           </q-item-section>
           <q-item-section>
-            <q-item-label>Lab</q-item-label>
+            <q-item-label class="drawerLabel">Lab</q-item-label>
           </q-item-section>
         </q-item>
+
         <q-item to="/customers" active-class="q-item-no-link-highlighting" v-if="$auth.isAuthenticated">
           <q-item-section avatar>
-            <q-icon name="people"/>
+            <q-icon class="drawerIcon" name="people"/>
           </q-item-section>
           <q-item-section>
-            <q-item-label>Customers</q-item-label>
+            <q-item-label class="drawerLabel">Customers</q-item-label>
           </q-item-section>
         </q-item>
+
         <q-item to="/stock" active-class="q-item-no-link-highlighting" v-if="$auth.isAuthenticated">
           <q-item-section avatar>
-            <q-icon name="table_view"/>
+            <q-icon class="drawerIcon" name="table_view"/>
           </q-item-section>
           <q-item-section>
-            <q-item-label>Stock</q-item-label>
+            <q-item-label class="drawerLabel">Stock</q-item-label>
           </q-item-section>
         </q-item>
+
         <q-item to="/orders" active-class="q-item-no-link-highlighting" v-if="$auth.isAuthenticated">
           <q-item-section avatar>
-            <q-icon name="list"/>
+            <q-icon class="drawerIcon" name="list"/>
           </q-item-section>
           <q-item-section>
-            <q-item-label>Orders</q-item-label>
+            <q-item-label class="drawerLabel">Orders</q-item-label>
           </q-item-section>
         </q-item>
+
       </q-list>
     </q-drawer>
 
@@ -184,3 +195,22 @@ export default {
   }
 };
 </script>
+
+<!--Notice lang="scss"-->
+<style lang="scss">
+.drawerIcon {
+  color: white;
+}
+
+.drawerLabel {
+  color: white;
+}
+
+.Qtoolbar {
+  background-color: white;
+}
+
+.toolbarText {
+  color: black;
+}
+</style>
