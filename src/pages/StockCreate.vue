@@ -22,7 +22,19 @@
               emit-value
               hide-selected
               map-options
-            ></q-select>
+            >
+              <template v-slot:option="scope">
+                <q-item
+                  v-bind="scope.itemProps"
+                  v-on="scope.itemEvents"
+                >
+                  <q-item-section>
+                    <q-item-label v-html="scope.opt.ProductName"></q-item-label>
+                    <q-item-label caption>{{ scope.opt.TestBatch }}</q-item-label>
+                  </q-item-section>
+                </q-item>
+              </template>
+            </q-select>
           </q-item-section>
         </q-item>
         <q-item>
