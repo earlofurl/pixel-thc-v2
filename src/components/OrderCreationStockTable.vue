@@ -270,7 +270,7 @@
         return this.availableQuantity < 0;
       },
       stockChangeDisplay() {
-        if (this.newItemType === 'Preroll - Single') {
+        if (this.newItemType === 'Preroll - Single' && this.selectedRow.itemType !== 'Preroll - Single') {
           return (this.quantityInputText / 2)
         } else return this.quantityInputText
       }
@@ -294,7 +294,7 @@
       submitCardNewItem(row, newItemType, newUoM, quantity, ppu) {
         const newRow = this.mutateStockIntoNewLineItem(row, newItemType, newUoM, quantity, ppu)
         this.$store.dispatch("order/addToNewOrder", newRow)
-        if (newItemType === 'Preroll - Single') {
+        if (newItemType === 'Preroll - Single' && row.itemType !== 'Preroll - Single') {
           const halfQuantity = (quantity / 2)
           this.adjustOriginalInventory(row, halfQuantity)
         } else this.adjustOriginalInventory(row, quantity)
