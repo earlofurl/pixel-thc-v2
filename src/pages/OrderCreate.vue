@@ -94,7 +94,7 @@
       </q-list>
       <OrderCreationStockTable />
       <div><p>For now, click row in bottom table to remove item.</p></div>
-      <OrderCreationTable />
+      <NewOrderItemsTable />
       <q-btn type="submit" class="q-mr-xs" label="Submit" />
     </q-form>
   </div>
@@ -102,12 +102,12 @@
 
 <script>
   import store from "../store";
-  import OrderCreationTable from "components/NewOrderItemsTable";
+  import NewOrderItemsTable from "components/NewOrderItemsTable";
   import OrderCreationStockTable from "components/OrderCreationStockTable";
 
   export default {
     name: "OrderCreate",
-    components: {OrderCreationStockTable, OrderCreationTable },
+    components: {OrderCreationStockTable, NewOrderItemsTable },
     data() {
       return {
         order: {}, // initialize empty order object

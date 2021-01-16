@@ -107,6 +107,12 @@ export default {
     return statusChange;
   },
 
+  async patchOrderItems(id, items) {
+    let lineItems = await apiClient.patch(`/orders/${id}/update`, items);
+    console.log("Updated Items: " + lineItems);
+    return lineItems;
+  },
+
   async deleteOrder(id) {
     await apiClient.delete(`orders/${id}`).then(response => {
       console.log(response);

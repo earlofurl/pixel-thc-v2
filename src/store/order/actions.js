@@ -84,3 +84,16 @@ export function deleteLineItem({ commit, getters, state }, id) {
     return response.data;
   });
 }
+
+export function addToOrder({ commit, getters, state }, order, items) {
+  console.log(order);
+  console.log(items);
+  let lineItems = [];
+  lineItems.push(order.lineItems);
+  lineItems.push(items);
+  return apiService.patchOrderItems(order.id, lineItems).then(response => {
+    console.log(response);
+    commit("UPDATE_ORDER_ITEMS", response.data);
+    return response.data;
+  });
+}

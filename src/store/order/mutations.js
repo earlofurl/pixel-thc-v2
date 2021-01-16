@@ -18,6 +18,10 @@ export function ADD_TO_NEW_ORDER(state, newOrderItem) {
   state.newOrder.push(newOrderItem);
 }
 
+export function UPDATE_ORDER_ITEMS(state, items) {
+  state.order.lineItems = items;
+}
+
 export function CREATE_FRESH_NEW_ORDER_OBJECT(state) {
   state.newOrder = [];
 }

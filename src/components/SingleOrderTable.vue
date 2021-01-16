@@ -41,22 +41,42 @@
               </q-td>
             </q-tr>
           </template>
+      <template v-slot:top-right>
+        <q-btn class="add-button" @click="onAddClick" color="primary" label="Add New"/>
+      </template>
     </q-table>
+    <q-dialog v-model="stockCard">
+      <q-card>
+        <q-form class="q-gutter-md" @submit="addToOrder">
+        <q-card-section>
+          <OrderCreationStockTable />
+        </q-card-section>
+        <q-card-section>
+          <NewOrderItemsTable />
+        </q-card-section>
+        <q-btn type="submit" class="q-mr-xs" label="Submit" />
+        </q-form>
+      </q-card>
+    </q-dialog>
   </div>
 </template>
 
 <script>
 import store from "../store";
+import OrderCreationStockTable from "components/OrderCreationStockTable";
+import NewOrderItemsTable from "components/NewOrderItemsTable";
 
 // TODO: Rows sometimes switch position after packed checkbox is clicked.
 
 export default {
   name: "SingleOrderTable",
+  components: {NewOrderItemsTable, OrderCreationStockTable},
   data() {
     return {
       title: "Single Order Table",
       loading: false,
       orderIsPacked: false,
+      stockCard: false,
       pagination: {
         rowsPerPage: 20,
         sortBy: "itemType",
@@ -136,6 +156,9 @@ export default {
     lineItems() {
       return this.$store.state.order.order.lineItems
     },
+    newOrderItems() {
+      return this.$store.state.order.newOrder // initialize array for new line-item objects to be added to new order
+    },
     // orderIsPacked() {
     //   const lineItems = this.lineItems
     //   const lineItemsPacked = lineItems.packedStatus.every(e => {
@@ -188,40 +211,29 @@ export default {
       console.log(`Delete Line Item has been triggered on Item id #${id}`);
       this.$store.dispatch("order/deleteLineItem", id);
     },
-    // async changeLineItemStatus(id, status) { // pass id and status params from row props on click of checkbox
-    //   console.log(id, status);
-    //   await this.$store.dispatch("lineItem/changeLineItemStatus", id, status).then(response => { // pass request to store and await response
-    //     const items = this.lineItems // set lineItems array in var items
-    //     let itemsPacked = [] // initialize array for analyzing whether item is packed or not
-    //     items.forEach(item => { // iterate through items array and add packed status to itemsPacked array
-    //       itemsPacked.push(item.packedStatus);
-    //     })
-    //     console.log(itemsPacked)
-    //     let allPacked = itemsPacked.every(e => { // check if every packed status is true
-    //       return e === true
-    //     })
-    //     console.log(allPacked)
-    //     // if every item status is packed = true, then change overall status of order to 'PACKED', else change to 'OPEN'
-    //     // TODO: add condition where instead of changing to 'OPEN' if already open, just do nothing, else change back to 'OPEN' in case status was previously 'PACKED'
-    //     allPacked === true ? this.changeOrderStatus('PACKED') : this.changeOrderStatus('OPEN')
-    //   })
-    // },
-    // async changeLineItemStatus(id, status) {
-    //   console.log(id, status);
-    //   await this.$store.dispatch("lineItem/changeLineItemStatus", id, status).then(response => {
-    //     const items = this.lineItems
-    //     let itemsPacked = []
-    //     items.forEach(item => {
-    //       itemsPacked.push(item.packedStatus);
-    //     })
-    //     console.log(itemsPacked)
-    //     let allPacked = itemsPacked.every(e => {
-    //       return e === true
-    //     })
-    //     console.log(allPacked)
-    //     allPacked === true ? this.changeOrderStatus('PACKED') : this.changeOrderStatus('OPEN')
-    //   })
-    // },
+    onAddClick() {
+      this.stockCard = true
+    },
+    addToOrder() {
+      console.log("addToOrder called in SingleOrderTable.vue")
+      const itemsToAdd = this.newOrder
+      this.$store
+        .dispatch("order/addToOrder", this.$store.state.order.order, itemsToAdd ) // pass order object to the createOrder action in store
+        .then(res => {
+          for (let item in this.itemsToAdd) { // iterate through lineItems array
+            let lineItemData = this.itemsToAdd[item] // select a single line item object
+            let stockUpdateData = this.$store.state.stock.stocks.find(x => x.id === lineItemData.stockId) // select stock object parent of line-item object using stockId from line-item object
+            let stockUpdatePatch = {}
+            stockUpdatePatch.id = stockUpdateData.id
+            stockUpdatePatch.quantity = stockUpdateData.quantity
+            this.$store.dispatch("stock/patchStock", stockUpdatePatch) // dispatch putStock action in store to adjust stock quantity in backend
+          }
+          // this.order = this.createFreshOrderObject(); // after receiving positive response, create a new order object to refresh form
+          // this.$store.dispatch("order/createFreshNewOrderObject") // create new order object in store state as well. Are both of these necessary?
+          // this.$router.push('/orders') // return user to order table
+
+        });
+    },
     async changeOrderStatus(status) {
       const id = this.order.id
       console.log(`This will change the status of Order #${id} to ${status}.`)

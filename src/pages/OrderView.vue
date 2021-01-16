@@ -39,15 +39,6 @@
         </q-card>
       </div>
     </q-dialog>
-<!--    <div>-->
-<!--      <q-fab-->
-<!--        v-model="fabRight"-->
-<!--        vertical-actions-align="left"-->
-<!--        color="primary"-->
-<!--        icon="keyboard_arrow_up"-->
-<!--        direction="up"-->
-<!--      ></q-fab>-->
-<!--    </div>-->
   </div>
 </template>
 
@@ -56,6 +47,7 @@ import OrderCard from "components/OrderCard";
 import SingleOrderTable from "components/SingleOrderTable";
 import OrderTotalCard from "components/OrderTotalCard";
 import OrderStatusCard from "components/OrderStatusCard";
+import OrderCreationStockTable from "components/OrderCreationStockTable";
 export default {
   components: {OrderStatusCard, OrderTotalCard, SingleOrderTable, OrderCard },
   data() {

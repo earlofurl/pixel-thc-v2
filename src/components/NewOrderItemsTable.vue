@@ -30,7 +30,7 @@
 <script>
   import apiService from "src/services/apiService";
   export default {
-    name: "OrderCreationTable",
+    name: "NewOrderItemsTable",
     data() {
       return {
         title: "Order Creation Table",

@@ -360,6 +360,7 @@
       adjustOriginalInventory(row, adjustQuantity) {
         let newRow = row
         row.quantity = row.quantity - adjustQuantity;
+        // TODO: BUG! This line below is what's causing the problem with order state being overwritten.
         this.$store.dispatch("order/putOrder", newRow)
       },
     }
