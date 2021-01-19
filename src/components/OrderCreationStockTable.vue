@@ -296,8 +296,8 @@
         this.$store.dispatch("order/addToNewOrder", newRow)
         if (newItemType === 'Preroll - Single' && row.itemType !== 'Preroll - Single') {
           const halfQuantity = (quantity / 2)
-          this.adjustOriginalInventory(row, halfQuantity)
-        } else this.adjustOriginalInventory(row, quantity)
+          this.adjustOriginalInventoryFromMutation(row, halfQuantity)
+        } else this.adjustOriginalInventoryFromMutation(row, quantity)
         this.card = false
       },
       getThcPercent(cid) {
@@ -362,6 +362,12 @@
         row.quantity = row.quantity - adjustQuantity;
         // TODO: BUG! This line below is what's causing the problem with order state being overwritten.
         this.$store.dispatch("order/putOrder", newRow)
+      },
+      adjustOriginalInventoryFromMutation(row, adjustQuantity) {
+        let newRow = row
+        row.quantity = row.quantity - adjustQuantity;
+        // TODO: BUG! This line below is what's causing the problem with order state being overwritten.
+        // this.$store.dispatch("order/putOrder", newRow)
       },
     }
   };

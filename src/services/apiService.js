@@ -109,7 +109,7 @@ export default {
 
   async patchOrderItems(id, items) {
     let lineItems = await apiClient.patch(`/orders/${id}/update`, items);
-    console.log("Updated Items: " + lineItems);
+    console.log("Updated Items: " + JSON.stringify(lineItems));
     return lineItems;
   },
 

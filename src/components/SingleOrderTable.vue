@@ -216,12 +216,24 @@ export default {
     },
     addToOrder() {
       console.log("addToOrder called in SingleOrderTable.vue")
-      const itemsToAdd = this.newOrder
+      console.log('newOrderItems are: ' + JSON.stringify(this.$store.state.order.newOrder))
+      let newOrderObject = {}
+      let itemArray = []
+      for (let item in this.$store.state.order.order.lineItems) {
+        itemArray.push(this.$store.state.order.order.lineItems[item])
+      }
+      for (let item in this.$store.state.order.newOrder) {
+        itemArray.push(this.$store.state.order.newOrder[item])
+      }
+      newOrderObject.id = this.$store.state.order.order.id
+      newOrderObject.lineItems = itemArray
+
+      // TODO: store dispatch only accepts one argument, hence the undefined. condense what's sent.
       this.$store
-        .dispatch("order/addToOrder", this.$store.state.order.order, itemsToAdd ) // pass order object to the createOrder action in store
+        .dispatch("order/addToOrder", newOrderObject) // pass order object to the createOrder action in store
         .then(res => {
-          for (let item in this.itemsToAdd) { // iterate through lineItems array
-            let lineItemData = this.itemsToAdd[item] // select a single line item object
+          for (let item in this.$store.state.order.newOrder) { // iterate through lineItems array
+            let lineItemData = this.this.$store.state.order.newOrder[item] // select a single line item object
             let stockUpdateData = this.$store.state.stock.stocks.find(x => x.id === lineItemData.stockId) // select stock object parent of line-item object using stockId from line-item object
             let stockUpdatePatch = {}
             stockUpdatePatch.id = stockUpdateData.id
